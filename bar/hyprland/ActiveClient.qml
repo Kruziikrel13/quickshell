@@ -10,27 +10,27 @@ WrapperItem {
   anchors.verticalCenter: parent.verticalCenter
   visible: !!window
 
+  Component.onCompleted: getClient.running = true
+
   // Runs once on startup
   Process {
-    running: true
+    id: getClient
     command: ["bash", "-c", "hyprctl activewindow -j"]
     stdout: StdioCollector {
       onStreamFinished: {
-        window = JSON.parse(text).initialTitle
+        window = JSON.parse(this.text).initialTitle ?? ""
       }
     }
   }
-
 
   Connections {
     target: Hyprland
     function onRawEvent(event) {
       switch (event.name) {
         case "activewindowv2":
-        case "closewindow":
         case "openwindowv2":
-        Hyprland.refreshToplevels()
-        window = Hyprland.activeToplevel?.lastIpcObject.initialTitle
+        case "closewindow":
+        getClient.running = true;
         break;
       }
     }
