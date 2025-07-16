@@ -1,5 +1,5 @@
 import QtQuick
-import ".."
+import qs
 
 Text {
   readonly property color defaultColor: ShellGlobals.colors.fontPrimary
