@@ -33,6 +33,7 @@ PanelWindow {
     }
     ModuleGroup {
       center: true
+      Clock {}
     }
     ModuleGroup {
       layoutDirection: Qt.RightToLeft
