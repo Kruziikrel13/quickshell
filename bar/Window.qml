@@ -4,7 +4,7 @@ import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 import "hyprland" as Hyprland
-import ".."
+import qs
 
 PanelWindow {
   id: root
@@ -37,6 +37,7 @@ PanelWindow {
     }
     ModuleGroup {
       layoutDirection: Qt.RightToLeft
+
     }
   }
 }
