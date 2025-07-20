@@ -1,4 +1,3 @@
-pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Io
 import Quickshell.Widgets
@@ -6,6 +5,7 @@ import Quickshell.Hyprland
 import qs.components
 
 WrapperItem {
+  id: root
   property string window: ""
   anchors.verticalCenter: parent.verticalCenter
   visible: !!window
@@ -18,7 +18,7 @@ WrapperItem {
     command: ["bash", "-c", "hyprctl activewindow -j"]
     stdout: StdioCollector {
       onStreamFinished: {
-        window = JSON.parse(this.text).initialTitle ?? ""
+        root.window = JSON.parse(this.text).initialTitle ?? ""
       }
     }
   }
@@ -37,6 +37,6 @@ WrapperItem {
   }
 
   StyledText {
-    text: window
+    text: root.window
   }
 }
