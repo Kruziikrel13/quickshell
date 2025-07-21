@@ -1,18 +1,9 @@
 //@ pragma ShellId shell
+//@ pragma UseQApplication
 
 import Quickshell
 import "bar" as Bar
 
 ShellRoot {
-  Variants {
-    model: Quickshell.screens
-
-    Scope {
-      required property ShellScreen modelData
-
-      Bar.Window {
-        screen: modelData
-      }
-    }
-  }
+  Bar.Window {}
 }
