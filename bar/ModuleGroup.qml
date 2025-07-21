@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import qs
 
 Rectangle {
+  id: root
   Layout.fillWidth: true
   Layout.fillHeight: true
   Layout.preferredWidth: 1
@@ -17,8 +18,8 @@ Rectangle {
     spacing: 7.5
     padding: 12.5
     anchors {
-      fill: parent.center ? undefined : parent
-      centerIn: parent.center ? parent : undefined
+      fill: root.center ? undefined : root
+      centerIn: root.center ? root : undefined
     }
   }
 }
