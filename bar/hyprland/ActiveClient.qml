@@ -4,11 +4,13 @@ import Quickshell.Widgets
 import Quickshell.Hyprland
 import qs.components
 
+// FIX: Implement this in a similar format to Workspaces.qml
+// NOTE: This implementation is not currently possible until Hyprland.activeTopLevel.lastIpcObject is able to be properly bound and updated live
 WrapperItem {
   id: root
   property string window: ""
-  anchors.verticalCenter: parent.verticalCenter
   visible: !!window
+  anchors.verticalCenter: parent.verticalCenter
 
   Component.onCompleted: getClient.running = true
 
@@ -18,7 +20,7 @@ WrapperItem {
     command: ["bash", "-c", "hyprctl activewindow -j"]
     stdout: StdioCollector {
       onStreamFinished: {
-        root.window = JSON.parse(this.text).initialTitle ?? ""
+        root.window = JSON.parse(this.text).initialTitle ?? "";
       }
     }
   }
@@ -27,9 +29,9 @@ WrapperItem {
     target: Hyprland
     function onRawEvent(event) {
       switch (event.name) {
-        case "activewindowv2":
-        case "openwindowv2":
-        case "closewindow":
+      case "activewindowv2":
+      case "openwindowv2":
+      case "closewindow":
         getClient.running = true;
         break;
       }
@@ -37,6 +39,7 @@ WrapperItem {
   }
 
   StyledText {
+    id: text
     text: root.window
   }
 }
