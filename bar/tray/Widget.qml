@@ -23,7 +23,6 @@ WrapperItem {
         id: mouseArea
         required property var modelData
         property bool targetMenuOpen: false
-        acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
 
         onClicked: event => {
           event.accepted = true;
@@ -39,6 +38,12 @@ WrapperItem {
             if (modelData.hasMenu)
               menu.open();
             break;
+          }
+        }
+
+        onPressed: event => {
+          if (event.button == Qt.RightButton && modelData.hasMenu) {
+            targetMenuOpen = !targetMenuOpen;
           }
         }
 

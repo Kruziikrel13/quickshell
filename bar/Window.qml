@@ -3,6 +3,7 @@ import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 import "hyprland" as Hyprland
+import "tray" as Tray
 import qs
 
 Scope {
@@ -41,7 +42,7 @@ Scope {
         }
         ModuleGroup {
           layoutDirection: Qt.RightToLeft
-          Tray {
+          Tray.Widget {
             bar: window
           }
         }
