@@ -1,3 +1,4 @@
+//@ pragma Internal
 import Quickshell
 import Quickshell.Widgets
 import qs.components
@@ -14,4 +15,3 @@ WrapperItem {
     text: Qt.formatDateTime(time.date, "hh:mm - dddd dd.")
   }
 }
-
