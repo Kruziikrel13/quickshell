@@ -1,3 +1,4 @@
+import qs
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
@@ -22,7 +23,7 @@ Variants {
 
     Image {
       anchors.fill: parent
-      source: "icelandbeach2.jpg"
+      source: ShellGlobals.backgroundImage
     }
   }
 }

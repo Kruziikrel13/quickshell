@@ -23,6 +23,11 @@ Singleton {
   readonly property int normalSize: 16
 
   /**
+   * Shell Background Image
+   */
+  readonly property string backgroundImage: "sunnymountains.jpg"
+
+  /**
    * Sizing constants for bars, icons, and fonts.
    */
   readonly property var sizes: QtObject {
