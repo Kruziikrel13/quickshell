@@ -3,9 +3,9 @@
 
 import Quickshell
 import "bar" as Bar
-import "background" as Background
+import "background"
 
 ShellRoot {
-  Background.Window {}
+  Background {}
   Bar.Window {}
 }
