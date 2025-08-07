@@ -27,7 +27,7 @@ Loader {
 
       Image {
         anchors.fill: parent
-        source: `${Quickshell.shellDir}/assets/${ShellGlobals.backgroundImage}`
+        source: Qt.resolvedUrl(Quickshell.shellPath("assets/wallpapers")) + "/" + ShellGlobals.backgroundImage
         fillMode: Image.PreserveAspectCrop
       }
     }
