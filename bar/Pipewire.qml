@@ -5,15 +5,15 @@ import qs
 import qs.components
 import qs.services
 
-WrapperItem {
-  id: root
+Loader {
+  active: Audio.ready
   anchors.verticalCenter: parent.verticalCenter
-
-  WrapperMouseArea {
+  sourceComponent: WrapperMouseArea {
     id: mouseArea
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     hoverEnabled: true
     onClicked: event => {
+      event.accepted = true;
       switch (event.button) {
       case Qt.LeftButton:
         Quickshell.execDetached(["bash", "-c", `wpctl set-mute ${Audio.sink?.id} toggle`]);
@@ -22,9 +22,7 @@ WrapperItem {
         Quickshell.execDetached(["ghostty", "--class=ghostty.tui", "-e", "pulsemixer"]);
         break;
       }
-      event.accepted = true;
     }
-
     StyledText {
       color: mouseArea.containsMouse ? ShellGlobals.colors.primary : defaultColor
       text: {
