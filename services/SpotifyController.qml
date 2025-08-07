@@ -4,7 +4,6 @@ import Quickshell
 import Quickshell.Services.Mpris
 
 Singleton {
-  id: root
   readonly property MprisPlayer player: Mpris.players.values.find(player => player.identity == "Spotify") ?? null
   readonly property bool active: !!player && player.canSeek // Should hopefully account for DJ
   readonly property bool playing: player?.isPlaying ?? null
