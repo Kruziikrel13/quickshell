@@ -28,7 +28,6 @@ WrapperItem {
       case "activewindowv2":
       case "openwindowv2":
       case "closewindow":
-      case "focusedmonv2":
         getClient.running = true;
         break;
       }
