@@ -7,7 +7,7 @@ import Quickshell.Services.Mpris
 Singleton {
   id: root
   readonly property MprisPlayer _spotifyinstance: Mpris.players.values.find(player => player.identity == "Spotify") ?? null
-  readonly property bool active: _spotifyinstance != null
+  readonly property bool active: _spotifyinstance !== null
   signal spotifyOpened
   signal spotifyClosed
   signal trackChanged

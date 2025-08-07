@@ -1,5 +1,4 @@
 //@ pragma Internal
-
 pragma ComponentBehavior: Bound
 
 import QtQuick
@@ -15,8 +14,14 @@ WrapperMouseArea {
   visible: SpotifyController.active
   anchors.verticalCenter: parent.verticalCenter
   hoverEnabled: true
-  acceptedButtons: Qt.LeftButton
-  onClicked: Quickshell.execDetached(["hyprctl", "dispatch", "focuswindow", "class:spotify"])
+  acceptedButtons: Qt.RightButton
+  onClicked: event => {
+    switch (event.button) {
+    case Qt.RightButton:
+      Quickshell.execDetached(["hyprctl", "dispatch", "focuswindow", "class:spotify"]);
+      break;
+    }
+  }
   RowLayout {
     spacing: 10
     Loader {
