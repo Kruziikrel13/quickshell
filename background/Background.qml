@@ -1,29 +1,35 @@
 import qs
+import qs.components
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
 
-Variants {
-  model: Quickshell.screens
-  PanelWindow {
-    id: background
-    required property ShellScreen modelData
-    screen: modelData
+Loader {
+  active: !!ShellGlobals.backgroundImage
+  Variants {
+    model: Quickshell.screens
 
-    exclusionMode: ExclusionMode.Ignore
-    WlrLayershell.layer: WlrLayer.Background
-    WlrLayershell.namespace: "shell:background"
+    StyledWindow {
+      name: "background"
+      required property ShellScreen modelData
+      screen: modelData
 
-    anchors {
-      top: true
-      bottom: true
-      left: true
-      right: true
-    }
+      WlrLayershell.layer: WlrLayer.Background
+      WlrLayershell.exclusionMode: ExclusionMode.Ignore
+      color: "black"
 
-    Image {
-      anchors.fill: parent
-      source: ShellGlobals.backgroundImage
+      anchors {
+        top: true
+        bottom: true
+        left: true
+        right: true
+      }
+
+      Image {
+        anchors.fill: parent
+        source: `${Quickshell.shellDir}/assets/${ShellGlobals.backgroundImage}`
+        fillMode: Image.PreserveAspectCrop
+      }
     }
   }
 }
