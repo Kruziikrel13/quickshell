@@ -42,6 +42,7 @@ Scope {
         ModuleGroup {
           center: true
           Clock {}
+          Spotify {}
         }
         ModuleGroup {
           layoutDirection: Qt.RightToLeft
