@@ -1,14 +1,12 @@
 //@ pragma Internal
 import QtQuick
 import QtQuick.Layouts
-import qs
 
-Rectangle {
+Item {
   id: root
   Layout.fillWidth: true
   Layout.fillHeight: true
   Layout.preferredWidth: 1
-  color: ShellGlobals.colors.foreground
   property alias layoutDirection: content.layoutDirection
   default property alias moduleItems: content.data
 
