@@ -1,36 +1,64 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Quickshell.Services.Mpris
 
 Singleton {
-  readonly property MprisPlayer player: Mpris.players.values.find(player => player.identity == "Spotify") ?? null
-  readonly property bool active: !!player && player.canSeek // Should hopefully account for DJ
-  readonly property bool playing: player?.isPlaying ?? null
-  readonly property string trackIcon: player?.trackArtUrl ?? null
-  readonly property string trackArtist: player?.trackArtist ?? null
-  readonly property string trackTitle: player?.trackTitle ?? null
+  id: root
+  readonly property MprisPlayer _spotifyinstance: Mpris.players.values.find(player => player.identity == "Spotify") ?? null
+  readonly property bool active: _spotifyinstance != null
+  signal spotifyOpened
+  signal spotifyClosed
+  signal trackChanged
 
-  readonly property string trackInfo: {
-    if (!active || !playing)
-      return null;
+  property var activeTrack: null
+  property bool isPlaying: this._spotifyinstance && this._spotifyinstance.isPlaying
 
-    let info = "";
-    if (trackArtist)
-      info += trackArtist;
-
-    if (trackTitle) {
-      if (info)
-        info += " - "; // If TrackArtist is also defined, split the two values with a '-'
-      info += trackTitle;
+  Connections {
+    target: root
+    function on_SpotifyinstanceChanged() {
+      if (root._spotifyinstance != null) {
+        root.spotifyOpened();
+      } else {
+        root.spotifyClosed();
+      }
     }
-    return info;
   }
 
-  function getTrackInfo(maxLength) {
-    if (trackInfo.length > maxLength) {
-      return trackInfo.slice(0, maxLength).trim() + "...";
+  function updateTrack() {
+    this.activeTrack = {
+      uniqueId: this._spotifyinstance?.uniqueId ?? 0,
+      artUrl: this._spotifyinstance?.trackArtUrl ?? "",
+      title: this._spotifyinstance?.trackTitle ?? "Unknown Title",
+      artist: this._spotifyinstance?.trackArtist ?? "Unknown Artist",
+      album: this._spotifyinstance?.trackAlbum ?? "Unknown Album"
+    };
+    this.trackChanged();
+  }
+
+  Loader {
+    active: root.active
+    sourceComponent: Connections {
+      target: root._spotifyinstance
+
+      Component.onCompleted: {
+        root.updateTrack();
+      }
+
+      Component.onDestruction: {
+        root.activeTrack = null;
+      }
+
+      function onPostTrackChanged() {
+        root.updateTrack();
+      }
+
+      function onTrackArtUrlChanged() {
+        if (root._spotifyinstance.uniqueId === root.activeTrack.uniqueId && root._spotifyinstance.trackArtUrl !== root.activeTrack.artUrl) {
+          root.updateTrack();
+        }
+      }
     }
-    return trackInfo;
   }
 }

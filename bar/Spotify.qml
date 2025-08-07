@@ -1,33 +1,57 @@
 //@ pragma Internal
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Widgets
 import qs
 import qs.services
 import qs.components
 
-Loader {
-  active: SpotifyController.active
+WrapperMouseArea {
+  id: mouseArea
+  visible: SpotifyController.active
   anchors.verticalCenter: parent.verticalCenter
-  sourceComponent: WrapperMouseArea {
-    id: mouseArea
-    hoverEnabled: true
-    RowLayout {
-      spacing: 10
-      ClippingWrapperRectangle {
-        visible: !!SpotifyController.trackIcon
-        radius: icon.width / 4
+  hoverEnabled: true
+  acceptedButtons: Qt.LeftButton
+  onClicked: Quickshell.execDetached(["hyprctl", "dispatch", "focuswindow", "class:spotify"])
+  RowLayout {
+    spacing: 10
+    Loader {
+      active: SpotifyController.activeTrack?.artUrl ?? false
+      sourceComponent: ClippingWrapperRectangle {
+        radius: width / 4
         StyledIcon {
-          id: icon
           size: ShellGlobals.sizes.icons.larger
-          source: SpotifyController.trackIcon
+          source: SpotifyController.activeTrack.artUrl
           mipmap: true
-          asynchronous: false
         }
       }
-      StyledText {
-        text: SpotifyController.getTrackInfo(50)
+    }
+
+    Loader {
+      active: SpotifyController.activeTrack !== null
+      sourceComponent: StyledText {
+        text: {
+          let track = SpotifyController.activeTrack;
+
+          let info = "";
+
+          if (track.artist) {
+            info += track.artist;
+          }
+
+          if (track.title) {
+            if (info.length > 0) {
+              info += " - ";
+            }
+            info += track.title;
+          }
+
+          return info;
+        }
         color: mouseArea.containsMouse ? ShellGlobals.colors.primary : defaultColor
       }
     }
