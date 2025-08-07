@@ -35,6 +35,7 @@ Scope {
         spacing: 0
 
         ModuleGroup {
+          OsIcon {}
           Hyprland.Workspaces {}
           Hyprland.ActiveClient {}
         }
