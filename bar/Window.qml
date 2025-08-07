@@ -49,6 +49,7 @@ Scope {
           Tray {
             bar: window
           }
+          Pipewire {}
         }
       }
 
