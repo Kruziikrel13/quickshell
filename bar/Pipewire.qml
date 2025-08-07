@@ -1,3 +1,5 @@
+//@ pragma Internal
+
 import Quickshell
 import Quickshell.Widgets
 import QtQuick
