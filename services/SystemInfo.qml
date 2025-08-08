@@ -1,15 +1,16 @@
+pragma Singleton
+pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Quickshell.Io
-pragma Singleton
-pragma ComponentBehavior: Bound
 
 /**
  * System Information: Automated!
- * Borrowed heavily from https://github.com/end-4/dots-hyprland/blob/ii-qs/.config/quickshell/services/SystemInfo.qml
- */ 
+ * Borrowed heavily from https://github.com/end-4/dots-hyprland/blob/main/.config/quickshell/ii/services/SystemInfo.qml
+ */
 
 Singleton {
+  id: root
   property string distroName: "Unknown"
   property string distroId: "unknown"
   property string distroIcon: "linux-symbolic"
@@ -22,32 +23,34 @@ Singleton {
     running: true
     repeat: false
     onTriggered: {
-      getUsername.running = true
-      fileOsRelease.reload()
-      const textOsRelease = fileOsRelease.text()
+      getUsername.running = true;
+      fileOsRelease.reload();
+      const textOsRelease = fileOsRelease.text();
 
-      // Will assume for now that these always return successfully
-      const prettyNameMatch = textOsRelease.match(/^PRETTY_NAME="(.+?)"/m)
-      distroName = prettyNameMatch && prettyNameMatch[1]
+      // Extract the friendly name (PRETTY_NAME field, fallback to NAME)
+      const prettyNameMatch = textOsRelease.match(/^PRETTY_NAME="(.+?)"/m);
+      const nameMatch = textOsRelease.match(/^NAME="(.+?)"/m);
+      root.distroName = prettyNameMatch ? prettyNameMatch[1] : (nameMatch ? nameMatch[1].replace(/Linux/i, "").trim() : "Unknown");
 
-      const idMatch = textOsRelease.match(/^ID=(.+?)$/m)
-      distroId = idMatch && idMatch[1]
+      // Extract the ID
+      const idMatch = textOsRelease.match(/^ID="?(.+?)"?$/m);
+      root.distroId = idMatch ? idMatch[1] : "unknown";
 
-      switch (distroId) {
-        case "nixos": distroIcon = "nixos-symbolic"; break;
-        case "arch": distroIcon = "arch-symbolic"; break;
-        case "ubuntu": distroIcon = "ubuntu-symbolic"; break;
-        default: distroIcon = "linux-symbolic"; break;
+      switch (root.distroId) {
+      case "nixos":
+        root.distroIcon = "nixos-symbolic";
+        break;
+      case "arch":
+        root.distroIcon = "arch-symbolic";
+        break;
+      case "ubuntu":
+        root.distroIcon = "ubuntu-symbolic";
+        break;
+      default:
+        root.distroIcon = "linux-symbolic";
+        break;
       }
-
-      fileUptime.reload()
-      const textUptime = fileUptime.text()
     }
-  }
-
-  function getIcon() {
-    const iconsFolder = "root:/assets/icons/os/"
-    return iconsFolder + distroIcon
   }
 
   Process {
@@ -55,7 +58,7 @@ Singleton {
     command: ["whoami"]
     stdout: SplitParser {
       onRead: data => {
-        username = data.trim()
+        root.username = data.trim();
       }
     }
   }

@@ -1,18 +1,11 @@
+//@ pragma ShellId shell
 //@ pragma UseQApplication
-//@ pragma Env QT_QUICK_CONTROLS_STYLE=Basic
 
-// Adjust this to make the shell smaller or larger
-//@ pragma Env QT_SCALE_FACTOR=1
-
-import "./windows/Bar"
-import "./windows/MediaControls/"
-import "./windows/PowerMenu"
-import "./windows/OnScreenDisplay"
 import Quickshell
+import "bar" as Bar
+import "background"
 
-Scope {
-  Bar {}
-  // OnScreenDisplayVolume {}
-  // MediaControls {}
-  PowerMenu {}
+ShellRoot {
+  Background {}
+  Bar.Window {}
 }

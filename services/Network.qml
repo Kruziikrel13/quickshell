@@ -1,43 +1,57 @@
+pragma Singleton
+
 import Quickshell
 import Quickshell.Io
 import QtQuick
-pragma Singleton
 
 Singleton {
   id: root
+
+  property bool wifi: true
+  property bool ethernet: false
   property int updateInterval: 1000
-  property int networkType: 0
+  property string networkName: ""
+  property int networkStrength
+
   function update() {
-    updateNetworkType.running = true
+    updateConnectionType.startCheck();
   }
+
   Timer {
     interval: 10
     running: true
     repeat: true
     onTriggered: {
-      update()
-      interval = root.updateInterval
+      root.update();
+      interval = root.updateInterval;
     }
   }
-
   Process {
-    id: updateNetworkType
+    id: updateConnectionType
+    property string buffer
+    command: ["sh", "-c", "nmcli -t -f NAME,TYPE,DEVICE c show --active"]
     running: true
-    command: ["bash", "-c", "nmcli device status | grep connected | grep -v 'loopback' | cut -d ' ' -f 3"]
+    function startCheck() {
+      buffer = "";
+      updateConnectionType.running = true;
+    }
     stdout: SplitParser {
-      onRead: (data) => {
-        switch (data) {
-          case "ethernet":
-            root.networkType = 1
-            break;
-          case "wifi":
-            root.networkType = 2
-            break;
-          default:
-            root.networkType = 0
-            break;
-        }
+      onRead: data => {
+        updateConnectionType.buffer += data + "\n";
       }
+    }
+    onExited: (exitCode, exitStatus) => {
+      const lines = updateConnectionType.buffer.trim().split('\n');
+      let hasEthernet = false;
+      let hasWifi = false;
+      lines.forEach(line => {
+        if (line.includes("ethernet"))
+          hasEthernet = true;
+        else if (line.includes("wireless"))
+          hasWifi = true;
+      });
+      root.ethernet = hasEthernet;
+      root.wifi = hasWifi;
     }
   }
 }
