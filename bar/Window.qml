@@ -46,6 +46,7 @@ Scope {
         }
         ModuleGroup {
           layoutDirection: Qt.RightToLeft
+          Network {}
           Pipewire {}
           Tray {}
         }
