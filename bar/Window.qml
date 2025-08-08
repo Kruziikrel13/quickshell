@@ -47,9 +47,7 @@ Scope {
         ModuleGroup {
           layoutDirection: Qt.RightToLeft
           Pipewire {}
-          Tray {
-            bar: window
-          }
+          Tray {}
         }
       }
 

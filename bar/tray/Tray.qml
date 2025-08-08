@@ -1,14 +1,13 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
+import qs
 
 WrapperItem {
   id: root
   visible: SystemTray.items.values.length > 0
-  required property PanelWindow bar
   anchors.verticalCenter: parent.verticalCenter
 
   RowLayout {
@@ -16,8 +15,16 @@ WrapperItem {
     Repeater {
       model: SystemTray.items
       TrayItem {
-        bar: root.bar
+        required property SystemTrayItem modelData
+        item: modelData
       }
+    }
+
+    Rectangle {
+      visible: SystemTray.items.values.length > 0
+      implicitWidth: ShellGlobals.sizes.icons.smallest
+      implicitHeight: implicitWidth
+      color: ShellGlobals.colors.onbackground
     }
   }
 }
