@@ -25,7 +25,7 @@ Singleton {
   /**
    * Shell Background Image
    */
-  readonly property string backgroundImage: "sunnymountains.jpg"
+  readonly property string backgroundImage: "icelandbeach2.jpg"
 
   /**
    * Sizing constants for bars, icons, and fonts.
