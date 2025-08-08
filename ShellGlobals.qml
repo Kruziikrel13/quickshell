@@ -34,7 +34,8 @@ Singleton {
     readonly property real barHeight: 40
     readonly property var icons: QtObject {
       readonly property int smallest: smaller - 2
-      readonly property int smaller: normal - 4
+      readonly property int smaller: small - 2
+      readonly property int small: normal - 4
       readonly property int normal: root.normalSize
       readonly property int large: normal + 4
       readonly property int larger: large + 2
@@ -42,7 +43,8 @@ Singleton {
     }
     readonly property var font: QtObject {
       readonly property int smallest: smaller - 2
-      readonly property int smaller: normal - 4
+      readonly property int smaller: small - 2
+      readonly property int small: normal - 4
       readonly property int normal: root.normalSize
       readonly property int large: normal + 4
       readonly property int larger: large + 2
