@@ -37,6 +37,7 @@ Singleton {
     this.trackChanged();
   }
 
+  // Only load connection when Spotify is actually active
   Loader {
     active: root.active
     sourceComponent: Connections {
