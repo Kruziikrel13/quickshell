@@ -9,24 +9,24 @@ import qs
 import qs.services
 import qs.components
 
-WrapperMouseArea {
-  id: mouseArea
-  visible: SpotifyController.active
+Loader {
+  active: SpotifyController.activeTrack !== null
   anchors.verticalCenter: parent.verticalCenter
-  hoverEnabled: true
-  acceptedButtons: Qt.RightButton
-  onClicked: event => {
-    switch (event.button) {
-    case Qt.RightButton:
-      Quickshell.execDetached(["hyprctl", "dispatch", "focuswindow", "class:spotify"]);
-      break;
+  sourceComponent: WrapperMouseArea {
+    id: mouseArea
+    hoverEnabled: true
+    acceptedButtons: Qt.RightButton
+    onClicked: event => {
+      event.accepted = true;
+      switch (event.button) {
+      case Qt.RightButton:
+        Quickshell.execDetached(["hyprctl", "dispatch", "focuswindow", "class:spotify"]);
+        break;
+      }
     }
-  }
-  RowLayout {
-    spacing: 10
-    Loader {
-      active: SpotifyController.activeTrack?.artUrl ?? false
-      sourceComponent: ClippingWrapperRectangle {
+    RowLayout {
+      ClippingWrapperRectangle {
+        visible: SpotifyController.activeTrack.artUrl !== ""
         radius: width / 4
         StyledIcon {
           size: ShellGlobals.sizes.icons.larger
@@ -34,11 +34,8 @@ WrapperMouseArea {
           mipmap: true
         }
       }
-    }
-
-    Loader {
-      active: SpotifyController.activeTrack !== null
-      sourceComponent: StyledText {
+      StyledText {
+        color: mouseArea.containsMouse ? ShellGlobals.colors.primary : defaultColor
         text: {
           let track = SpotifyController.activeTrack;
 
@@ -57,7 +54,6 @@ WrapperMouseArea {
 
           return info;
         }
-        color: mouseArea.containsMouse ? ShellGlobals.colors.primary : defaultColor
       }
     }
   }
