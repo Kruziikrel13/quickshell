@@ -3,7 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import "hyprland" as Hyprland
 import "tray"
-import qs
+import qs.config
 import qs.components
 
 Scope {
@@ -16,8 +16,8 @@ Scope {
       required property ShellScreen modelData
       screen: modelData
 
-      implicitHeight: ShellGlobals.sizes.barHeight
-      color: ShellGlobals.colors.background
+      implicitHeight: BarConfig.height
+      color: BarConfig.background
 
       mask: Region {
         item: content

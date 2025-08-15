@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import qs
+import qs.config
 
 WrapperMouseArea {
   id: root
@@ -46,6 +47,6 @@ WrapperMouseArea {
       return icon;
     }
     asynchronous: true
-    implicitSize: ShellGlobals.sizes.font.normal * 1.1
+    implicitSize: StyleConfig.font.pixelSize.larger
   }
 }

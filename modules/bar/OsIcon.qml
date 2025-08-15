@@ -1,12 +1,12 @@
 //@ pragma Internal
 import Quickshell
 import QtQuick
+import qs.config
 import qs.services
 import qs.components
-import qs
 
 StyledIcon {
   anchors.verticalCenter: parent.verticalCenter
-  size: ShellGlobals.sizes.icons.larger
+  size: StyleConfig.font.pixelSize.huge
   source: Qt.resolvedUrl(Quickshell.shellPath("assets/icons")) + "/" + SystemInfo.distroIcon + ".svg"
 }

@@ -1,12 +1,15 @@
 import QtQuick
-import qs
+import qs.config
 
 Text {
-  readonly property color defaultColor: ShellGlobals.colors.fontPrimary
+  readonly property color defaultColor: StyleConfig.colourscheme.white
   renderType: Text.NativeRendering
-  font.hintingPreference: Font.PreferFullHinting
-  font.family: ShellGlobals.font.family.main
-  font.pixelSize: ShellGlobals.sizes.font.normal
+  verticalAlignment: Text.AlignVCenter
+  font {
+    hintingPreference: Font.PreferFullHinting
+    family: StyleConfig.font.family.main ?? "sans-serif"
+    pixelSize: StyleConfig.font.pixelSize.normal ?? 15
+  }
   elide: Text.ElideRight
   color: defaultColor
 }

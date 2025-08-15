@@ -1,5 +1,5 @@
 //@ pragma Internal
-import qs
+import qs.config
 import QtQuick
 import Quickshell.Hyprland
 import Quickshell.Widgets
@@ -12,20 +12,20 @@ WrapperMouseArea {
     readonly property bool empty: root.modelData.toplevels.values.length <= 0
     readonly property bool focused: root.modelData.focused
 
-    implicitHeight: (focused || !empty) ? ShellGlobals.sizes.icons.normal : ShellGlobals.sizes.icons.normal * 0.75
+    implicitHeight: (focused || !empty) ? StyleConfig.font.pixelSize.normal : StyleConfig.font.pixelSize.normal * 0.75
     implicitWidth: {
       if (focused && !empty)
-        return ShellGlobals.sizes.icons.normal * 2;
+        return StyleConfig.font.pixelSize.normal * 2;
       if (!empty)
-        return ShellGlobals.sizes.icons.normal;
-      return ShellGlobals.sizes.icons.normal * 0.75;
+        return StyleConfig.font.pixelSize.normal;
+      return StyleConfig.font.pixelSize.normal * 0.75;
     }
     color: {
       if (focused)
-        return ShellGlobals.colors.primary;
+        return StyleConfig.colourscheme.blue;
       if (!empty)
-        return ShellGlobals.colors.onbackground;
-      return ShellGlobals.colors.secondary;
+        return StyleConfig.colourscheme.foreground;
+      return StyleConfig.colourscheme.black;
     }
 
     Behavior on implicitWidth {

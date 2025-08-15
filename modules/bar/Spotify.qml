@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
 import qs
+import qs.config
 import qs.services
 import qs.components
 
@@ -29,13 +30,13 @@ Loader {
         visible: SpotifyController.activeTrack.artUrl !== ""
         radius: width / 4
         StyledIcon {
-          size: ShellGlobals.sizes.icons.larger
+          size: Styleconfig.font.pixelSize.huge
           source: SpotifyController.activeTrack.artUrl
           mipmap: true
         }
       }
       StyledText {
-        color: mouseArea.containsMouse ? ShellGlobals.colors.primary : defaultColor
+        color: mouseArea.containsMouse ? StyleConfig.colourscheme.blue : defaultColor
         text: {
           let track = SpotifyController.activeTrack;
 

@@ -3,7 +3,7 @@
 import Quickshell
 import Quickshell.Widgets
 import QtQuick
-import qs
+import qs.config
 import qs.components
 import qs.services
 
@@ -26,7 +26,7 @@ Loader {
       }
     }
     StyledText {
-      color: mouseArea.containsMouse ? ShellGlobals.colors.primary : defaultColor
+      color: mouseArea.containsMouse ? StyleConfig.colourscheme.blue : defaultColor
       text: {
         if (!Audio.ready)
           return "";

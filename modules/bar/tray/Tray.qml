@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import qs
+import qs.config
 
 WrapperItem {
   id: root
@@ -22,9 +23,9 @@ WrapperItem {
 
     Rectangle {
       visible: SystemTray.items.values.length > 0
-      implicitWidth: ShellGlobals.sizes.icons.smallest
+      implicitWidth: StyleConfig.font.pixelSize.smallest
       implicitHeight: implicitWidth
-      color: ShellGlobals.colors.onbackground
+      color: StyleConfig.colourscheme.black
     }
   }
 }

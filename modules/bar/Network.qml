@@ -4,12 +4,12 @@ import QtQuick
 import Quickshell
 import Quickshell.Widgets
 import qs
+import qs.config
 import qs.services
 import qs.components
 
 WrapperItem {
   anchors.verticalCenter: parent.verticalCenter
-
   WrapperMouseArea {
     id: mouseArea
     acceptedButtons: Qt.LeftButton | Qt.RightButton
@@ -24,7 +24,7 @@ WrapperItem {
       event.accepted = true;
     }
     StyledText {
-      color: mouseArea.containsMouse ? ShellGlobals.colors.primary : defaultColor
+      color: mouseArea.containsMouse ? StyleConfig.colourscheme.blue : defaultColor
       text: {
         if (Network.ethernet) {
           return "";

@@ -1,11 +1,11 @@
-import qs
+import qs.config
 import qs.components
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
 
-Loader {
-  active: !!ShellGlobals.backgroundImage
+LazyLoader {
+  active: !!BackgroundConfig.wallpaper
   Variants {
     model: Quickshell.screens
 
@@ -27,7 +27,7 @@ Loader {
 
       Image {
         anchors.fill: parent
-        source: Qt.resolvedUrl(Quickshell.shellPath("assets/wallpapers")) + "/" + ShellGlobals.backgroundImage
+        source: Qt.resolvedUrl(Quickshell.shellPath("assets/wallpapers")) + "/" + BackgroundConfig.wallpaper
         fillMode: Image.PreserveAspectCrop
       }
     }
