@@ -3,7 +3,7 @@
 
 import Quickshell
 import "modules/bar" as Bar
-import "background"
+import "modules/background"
 
 ShellRoot {
   Background {}
