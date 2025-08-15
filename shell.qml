@@ -2,7 +2,7 @@
 //@ pragma UseQApplication
 
 import Quickshell
-import "modules/bar" as Bar
+import "modules/bar"
 import "modules/background"
 
 ShellRoot {
