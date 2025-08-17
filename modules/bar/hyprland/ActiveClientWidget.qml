@@ -1,13 +1,12 @@
 import QtQuick
 import Quickshell.Io
-import Quickshell.Widgets
 import Quickshell.Hyprland
 import qs.components
+import ".."
 
-WrapperItem {
+BarWidget {
   id: root
-  visible: Hyprland.activeToplevel != null
-  anchors.verticalCenter: parent.verticalCenter
+  visible: window !== ""
   property string window: ""
 
   Component.onCompleted: getClient.running = true
@@ -36,6 +35,7 @@ WrapperItem {
 
   StyledText {
     id: text
+    bold: true
     text: root.window
   }
 }

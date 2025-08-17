@@ -7,8 +7,7 @@ import qs.config
 import qs.services
 import qs.components
 
-WrapperItem {
-  anchors.verticalCenter: parent.verticalCenter
+BarWidget {
   WrapperMouseArea {
     id: mouseArea
     acceptedButtons: Qt.LeftButton | Qt.RightButton

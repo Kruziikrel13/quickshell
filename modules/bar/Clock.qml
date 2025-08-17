@@ -1,17 +1,17 @@
 //@ pragma Internal
+
+import QtQuick
 import Quickshell
-import Quickshell.Widgets
 import qs.components
 
-WrapperItem {
-  anchors.verticalCenter: parent.verticalCenter
-
+BarWidget {
   SystemClock {
     id: time
     precision: SystemClock.Seconds
   }
 
   StyledText {
+    bold: true
     text: Qt.formatDateTime(time.date, "hh:mm - dddd dd.")
   }
 }

@@ -1,8 +1,8 @@
 //@ pragma Internal
-import qs.config
 import QtQuick
 import Quickshell.Hyprland
 import Quickshell.Widgets
+import qs.config
 
 WrapperMouseArea {
   id: root

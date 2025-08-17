@@ -2,7 +2,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import "hyprland" as Hyprland
-import "tray"
+import "tray" as Tray
 import qs.config
 import qs.components
 
@@ -35,8 +35,8 @@ Variants {
 
       ModuleGroup {
         OsIcon {}
-        Hyprland.Workspaces {}
-        Hyprland.ActiveClient {}
+        Hyprland.WorkspaceWidget {}
+        Hyprland.ActiveClientWidget {}
       }
       ModuleGroup {
         center: true
@@ -47,7 +47,7 @@ Variants {
         layoutDirection: Qt.RightToLeft
         Network {}
         Pipewire {}
-        Tray {}
+        Tray.Widget {}
       }
     }
 

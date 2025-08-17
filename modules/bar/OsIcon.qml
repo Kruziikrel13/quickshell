@@ -5,8 +5,9 @@ import qs.config
 import qs.services
 import qs.components
 
-StyledIcon {
-  anchors.verticalCenter: parent.verticalCenter
-  size: StyleConfig.font.pixelSize.huge
-  source: Qt.resolvedUrl(Quickshell.shellPath("assets/icons")) + "/" + SystemInfo.distroIcon + ".svg"
+BarWidget {
+  StyledIcon {
+    size: StyleConfig.font.pixelSize.huge
+    source: Qt.resolvedUrl(Quickshell.shellPath("assets/icons")) + "/" + SystemInfo.distroIcon + ".svg"
+  }
 }
