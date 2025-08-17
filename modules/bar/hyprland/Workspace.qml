@@ -24,9 +24,10 @@ WrapperMouseArea {
       if (focused)
         return StyleConfig.colourscheme.blue;
       if (!empty)
-        return StyleConfig.colourscheme.foreground;
+        return StyleConfig.colourscheme.white;
       return StyleConfig.colourscheme.black;
     }
+    radius: height / 4
 
     Behavior on implicitWidth {
       NumberAnimation {

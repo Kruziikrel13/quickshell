@@ -23,7 +23,7 @@ BarWidget {
         implicitWidth: 6
         implicitHeight: implicitWidth
         radius: height / 2
-        color: StyleConfig.colourscheme.brightWhite
+        color: StyleConfig.colourscheme.foreground
       }
     }
   }
