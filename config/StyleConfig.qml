@@ -6,8 +6,8 @@ import Quickshell
 Singleton {
   id: root
   property var colours
-  property QtObject font
-  property QtObject sizes
+  property var font
+  property var sizes
 
   property var colourscheme: colours.darkmode ? colours.dark : colours.light
 
@@ -84,12 +84,12 @@ Singleton {
   }
 
   font: QtObject {
-    property QtObject family: QtObject {
+    property var family: QtObject {
       property string main: "NotoSans Nerd Font Propo"
       property string monospace: "Jetbrains Mono Nerd Font"
       property string icons: "NotoSans Nerd Font Mono"
     }
-    property QtObject pixelSize: QtObject {
+    property var pixelSize: QtObject {
       property int smallest: smaller - 2
       property int smaller: small - 3
       property int small: normal - 1
