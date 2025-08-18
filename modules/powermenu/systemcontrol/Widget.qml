@@ -1,10 +1,12 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.config
 
 GridLayout {
   Layout.maximumHeight: icon.height
   Profile {
     id: icon
+    icon: PowerMenuConfig.profileImage
     Layout.column: 1
     Layout.row: 1
     Layout.rowSpan: 3
