@@ -31,7 +31,7 @@ StyledText {
         formatted += `${formatted ? ":" : ""}${String(hours).padStart(2, "0")}`;
       if (minutes > 0 || !formatted)
         formatted += `${formatted ? ":" : ""}${String(minutes).padStart(2, "0")}`;
-      if (seconds > 0 || !formatted)
+      if (seconds || !formatted)
         formatted += `${formatted ? ":" : ""}${String(seconds).padStart(2, "0")}`;
       root.uptime = formatted;
     }
