@@ -14,7 +14,6 @@ Singleton {
   property string distroName: "Unknown"
   property string distroId: "unknown"
   property string distroIcon: "linux-symbolic"
-  property string uptime: "unknown"
   property string username: "user"
 
   Timer {
@@ -61,11 +60,6 @@ Singleton {
         root.username = data.trim();
       }
     }
-  }
-
-  FileView {
-    id: fileUptime
-    path: "/proc/uptime"
   }
 
   FileView {
