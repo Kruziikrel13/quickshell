@@ -17,6 +17,7 @@ Singleton {
     property QtObject dark: QtObject {
       property color background: "#151519"
       property color foreground: "#b2b5b3"
+      property color accent: blue
 
       property color selectBackground: "#EBFF71"
       property color selectForeground: "#313234"
@@ -77,7 +78,6 @@ Singleton {
 
   sizes: QtObject {
     property real barHeight: 40
-    property real barGroupHeight: 32
     property real osdWidth: 200
     property real notificationPopupWidth: 410
   }
