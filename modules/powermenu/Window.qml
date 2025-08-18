@@ -1,5 +1,6 @@
 //@ pragma Internal
 import Quickshell
+import Quickshell.Wayland
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Effects
@@ -13,6 +14,7 @@ import qs.components
 StyledWindow {
   id: window
   name: "powermenu"
+  WlrLayershell.layer: WlrLayer.Overlay
   anchors {
     top: true
     right: true
