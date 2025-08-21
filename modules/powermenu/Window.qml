@@ -33,7 +33,7 @@ StyledWindow {
     radius: background.radius
     offset.x: 10
     offset.y: 10
-    blur: 20
+    blur: 10
     color: Qt.darker(background.color, 1.6)
   }
 
