@@ -42,7 +42,7 @@ Variants {
       ModuleGroup {
         center: true
         Clock {}
-        // Spotify {}
+        Spotify {}
       }
       ModuleGroup {
         layoutDirection: Qt.RightToLeft
