@@ -4,6 +4,11 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Mpris
 
+/**
+ * Spotify Controller: Specifically manages the Mpris player for Spotify.
+ *
+ */
+
 Singleton {
   id: root
   readonly property MprisPlayer _spotifyinstance: Mpris.players.values.find(player => player.identity == "Spotify") ?? null
