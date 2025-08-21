@@ -18,20 +18,34 @@ GridLayout {
     Uptime {}
     Layout.rightMargin: 25
   }
-  LockButton {
-    Layout.column: 3
-    Layout.row: 2
-  }
-  SuspendButton {
-    Layout.column: 4
-    Layout.row: 2
-  }
-  RebootButton {
-    Layout.column: 5
-    Layout.row: 2
-  }
-  PowerButton {
-    Layout.column: 6
-    Layout.row: 2
+  Repeater {
+    model: [
+      {
+        text: "",
+        command: "loginctl lock-session"
+      },
+      {
+        text: "",
+        command: "systemctl suspend"
+      },
+      {
+        text: "",
+        command: "systemctl reboot"
+      },
+      {
+        text: "",
+        command: "systemctl poweroff",
+        color: StyleConfig.colourscheme.red
+      }
+    ]
+    SysButton {
+      required property int index
+      required property var modelData
+      Layout.column: 3 + index
+      Layout.row: 2
+      text: modelData.text
+      command: modelData.command
+      color: modelData?.color ?? StyleConfig.colourscheme.white
+    }
   }
 }
