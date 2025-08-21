@@ -2,7 +2,6 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import "hyprland" as Hyprland
-import "powermenu" as PowerMenu
 import "tray" as Tray
 import qs.config
 import qs.components
@@ -46,7 +45,7 @@ Variants {
       }
       ModuleGroup {
         layoutDirection: Qt.RightToLeft
-        PowerMenu.Widget {}
+        PowerMenu {}
         Network {}
         Pipewire {}
         Tray.Widget {}

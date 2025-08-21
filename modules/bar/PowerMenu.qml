@@ -3,7 +3,6 @@ import Quickshell.Widgets
 import qs
 import qs.config
 import qs.components
-import ".."
 
 BarWidget {
   id: root
