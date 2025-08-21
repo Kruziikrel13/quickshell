@@ -1,38 +1,34 @@
-pragma ComponentBehavior: Bound
+import qs
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Io
 
 Scope {
-  PersistentProperties {
-    id: persist
-    property bool show: false
-  }
   IpcHandler {
     target: "powermenu"
 
     function open(): void {
-      persist.show = true;
+      GlobalStates.powermenu("open");
     }
 
     function close(): void {
-      persist.show = false;
+      GlobalStates.powermenu("close");
     }
 
     function toggle(): void {
-      persist.show = !persist.show;
+      GlobalStates.powermenu("toggle");
     }
   }
 
   LazyLoader {
     id: loader
-    active: persist.show
+    activeAsync: GlobalStates.showPowerMenu
     Window {
       id: window
       HyprlandFocusGrab {
         active: true
         windows: [window]
-        onCleared: persist.show = false
+        onCleared: GlobalStates.powermenu("close")
       }
     }
   }
