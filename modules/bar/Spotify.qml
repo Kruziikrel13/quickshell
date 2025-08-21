@@ -4,7 +4,6 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
-
 import qs.config
 import qs.services
 import qs.components
@@ -31,6 +30,7 @@ BarWidget {
           }
         }
         StyledText {
+          Layout.maximumWidth: 300
           color: mouseArea.containsMouse ? StyleConfig.colourscheme.blue : defaultColor
           text: {
             let track = SpotifyController.activeTrack;
