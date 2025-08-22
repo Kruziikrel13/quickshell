@@ -43,4 +43,5 @@ body:
       label: Possible Fix Ideas
       description: Notes, hunches, or related areas of code that might be relevant.
       placeholder: "Check file permissions in save module."
-         required: true
+    validations:
+      required: true
