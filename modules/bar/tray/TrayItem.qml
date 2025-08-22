@@ -8,7 +8,6 @@ import qs.config
 WrapperMouseArea {
   id: root
   required property SystemTrayItem item
-  property var bar: root.QsWindow.window
   acceptedButtons: Qt.LeftButton | Qt.RightButton
   onClicked: event => {
     event.accepted = true;
@@ -29,8 +28,8 @@ WrapperMouseArea {
   QsMenuAnchor {
     id: menu
     menu: root.item.menu
-    anchor.window: root.bar
-    anchor.rect.x: root.x + root.bar.width
+    anchor.item: root
+    anchor.rect.x: root.x
     anchor.rect.y: root.y
     anchor.rect.height: root.height
     anchor.edges: Edges.Bottom
