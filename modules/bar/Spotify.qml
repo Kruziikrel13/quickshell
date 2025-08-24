@@ -17,7 +17,7 @@ BarWidget {
     sourceComponent: WrapperMouseArea {
       id: mouseArea
       hoverEnabled: true
-      acceptedButtons: Qt.RightButton
+      acceptedButtons: Qt.LeftButton | Qt.RightButton
       onClicked: Quickshell.execDetached(["hyprctl", "dispatch", "focuswindow", "class:spotify"])
       RowLayout {
         ClippingWrapperRectangle {
