@@ -27,6 +27,8 @@ BarWidget {
             size: StyleConfig.font.pixelSize.huge
             source: SpotifyController.activeTrack.artUrl
             mipmap: true
+            backer.fillMode: Image.PreserveAspectCrop
+            backer.cache: false
           }
         }
         StyledText {
