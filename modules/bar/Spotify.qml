@@ -22,7 +22,7 @@ BarWidget {
       RowLayout {
         ClippingWrapperRectangle {
           visible: SpotifyController.activeTrack.artUrl !== ""
-          radius: width / 4
+          radius: 4
           StyledIcon {
             size: StyleConfig.font.pixelSize.huge
             source: SpotifyController.activeTrack.artUrl
