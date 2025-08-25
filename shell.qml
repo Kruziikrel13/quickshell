@@ -1,10 +1,11 @@
 //@ pragma ShellId shell
 //@ pragma UseQApplication
 
+import QtQuick
 import Quickshell
-import "modules/bar"
-import "modules/background"
-import "modules/powermenu" as PowerMenu
+import qs.modules.background
+import qs.modules.bar
+import qs.modules.powermenu as PowerMenu
 
 ShellRoot {
   Background {}
