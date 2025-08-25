@@ -1,8 +1,8 @@
-import qs.config
-import qs.components
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import qs.config
+import qs.components
 
 LazyLoader {
   active: !!BackgroundConfig.wallpaper
@@ -16,7 +16,6 @@ LazyLoader {
 
       WlrLayershell.layer: WlrLayer.Background
       WlrLayershell.exclusionMode: ExclusionMode.Ignore
-      color: "black"
 
       anchors {
         top: true
@@ -29,6 +28,9 @@ LazyLoader {
         anchors.fill: parent
         source: Qt.resolvedUrl(Quickshell.shellPath("assets/wallpapers")) + "/" + BackgroundConfig.wallpaper
         fillMode: Image.PreserveAspectCrop
+        cache: true
+        smooth: true
+        mipmap: false
       }
     }
   }
