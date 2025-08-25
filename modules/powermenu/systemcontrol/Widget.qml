@@ -1,12 +1,13 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.utils
 import qs.config
 
 GridLayout {
   Layout.maximumHeight: icon.height
   Profile {
     id: icon
-    icon: PowerMenuConfig.profileImage
+    icon: ShellSettings.general.avatarImage
     Layout.column: 1
     Layout.row: 1
     Layout.rowSpan: 3
