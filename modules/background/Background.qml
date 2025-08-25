@@ -1,18 +1,21 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
-import qs.config
+import qs.services
 import qs.components
 
 LazyLoader {
-  active: !!BackgroundConfig.wallpaper
+  active: WallpaperService.currentWallpaper !== ""
   Variants {
     model: Quickshell.screens
 
     StyledWindow {
+      id: background
       name: "background"
-      required property ShellScreen modelData
       screen: modelData
+      visible: wallpaperSource !== ""
+      required property ShellScreen modelData
+      property string wallpaperSource: WallpaperService.currentWallpaper !== "" ? WallpaperService.currentWallpaper : ""
 
       WlrLayershell.layer: WlrLayer.Background
       WlrLayershell.exclusionMode: ExclusionMode.Ignore
@@ -26,7 +29,8 @@ LazyLoader {
 
       Image {
         anchors.fill: parent
-        source: Qt.resolvedUrl(Quickshell.shellPath("assets/wallpapers")) + "/" + BackgroundConfig.wallpaper
+        source: background.wallpaperSource
+        visible: background.wallpaperSource !== ""
         fillMode: Image.PreserveAspectCrop
         cache: true
         smooth: true

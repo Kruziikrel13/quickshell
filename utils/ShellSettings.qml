@@ -4,6 +4,7 @@ import QtQuick
 import QtCore
 import Quickshell
 
+import qs.services
 
 /**
  * Global Settings Service
@@ -35,6 +36,9 @@ Singleton {
     property bool isRandom: false
     property int randomInterval: 300
 
+    onDirectoryChanged: WallpaperService.listWallpapers()
+    onIsRandomChanged: WallpaperService.toggleRandomWallpaper()
+    onRandomIntervalChanged: WallpaperService.restartRandomWallpaperTimer()
   }
 
   readonly property var init: () => {}
