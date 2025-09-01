@@ -17,11 +17,10 @@ StyledWindow {
     top: true
     right: true
   }
-  margins.top: 10
-  margins.right: 10
 
   implicitHeight: 180
   implicitWidth: 500
+
   mask: Region {
     item: background
   }
@@ -40,8 +39,8 @@ StyledWindow {
     id: background
     anchors.fill: parent
     anchors.topMargin: 20
-    anchors.bottomMargin: 20
     anchors.rightMargin: 20
+    anchors.bottomMargin: 20
     anchors.leftMargin: 20
     radius: 20
     color: StyleConfig.colourscheme.background
