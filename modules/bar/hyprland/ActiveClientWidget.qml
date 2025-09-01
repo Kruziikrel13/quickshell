@@ -12,7 +12,7 @@ BarWidget {
   Component.onCompleted: getClient.running = true
   Process {
     id: getClient
-    command: ["bash", "-c", "hyprctl activewindow -j"]
+    command: ["sh", "-c", "hyprctl activewindow -j"]
     stdout: StdioCollector {
       onStreamFinished: {
         root.window = JSON.parse(this.text).initialTitle ?? "";
