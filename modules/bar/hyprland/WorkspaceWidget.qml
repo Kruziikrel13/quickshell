@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell.Hyprland
 import ".."
 
@@ -8,7 +7,7 @@ BarWidget {
   Loader {
     id: loader
     active: Hyprland.workspaces.values.length > 0
-    sourceComponent: RowLayout {
+    sourceComponent: Row {
       spacing: 5
       Repeater {
         model: Hyprland.workspaces

@@ -1,6 +1,5 @@
 import Quickshell
 import QtQuick
-import QtQuick.Layouts
 import "hyprland" as Hyprland
 import "tray" as Tray
 import qs.config
@@ -18,38 +17,41 @@ Variants {
     implicitHeight: BarConfig.height
     color: BarConfig.background
 
-    mask: Region {
-      item: content
-    }
-
     anchors {
       left: true
       right: true
       top: true
     }
 
-    RowLayout {
-      id: content
-      anchors.fill: parent
-      spacing: 0
+    ModuleGroup {
+      id: leftContent
+      anchors.left: parent.left
+      anchors.leftMargin: 7.5
 
-      ModuleGroup {
-        OsIcon {}
-        Hyprland.WorkspaceWidget {}
-        Hyprland.ActiveClientWidget {}
-      }
-      ModuleGroup {
-        center: true
-        Clock {}
-        Spotify {}
-      }
-      ModuleGroup {
-        layoutDirection: Qt.RightToLeft
-        PowerMenu {}
-        Network {}
-        Pipewire {}
-        Tray.Widget {}
-      }
+      OsIcon {}
+      Hyprland.WorkspaceWidget {}
+      Hyprland.ActiveClientWidget {}
+    }
+
+    ModuleGroup {
+      id: centerContent
+
+      anchors.horizontalCenter: parent.horizontalCenter
+
+      Clock {}
+      Spotify {}
+    }
+
+    ModuleGroup {
+      id: rightContent
+
+      anchors.right: parent.right
+      anchors.rightMargin: 7.5
+
+      Tray.Widget {}
+      Pipewire {}
+      Network {}
+      PowerMenu {}
     }
 
     exclusionMode: ExclusionMode.Ignore

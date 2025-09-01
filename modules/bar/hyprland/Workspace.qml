@@ -7,18 +7,21 @@ import qs.config
 WrapperMouseArea {
   id: root
   required property HyprlandWorkspace modelData
+  anchors.verticalCenter: parent.verticalCenter
   onClicked: modelData.activate()
+  readonly property int normalSize: StyleConfig.font.pixelSize.normal
+  readonly property int smallSize: Math.round(StyleConfig.font.pixelSize.normal * 0.75)
   Rectangle {
     readonly property bool empty: root.modelData.toplevels.values.length <= 0
     readonly property bool focused: root.modelData.focused
 
-    implicitHeight: (focused || !empty) ? StyleConfig.font.pixelSize.normal : StyleConfig.font.pixelSize.normal * 0.75
+    implicitHeight: (focused || !empty) ? root.normalSize : root.smallSize
     implicitWidth: {
       if (focused && !empty)
-        return StyleConfig.font.pixelSize.normal * 2;
+        return Math.round(StyleConfig.font.pixelSize.normal * 1.5);
       if (!empty)
-        return StyleConfig.font.pixelSize.normal;
-      return StyleConfig.font.pixelSize.normal * 0.75;
+        return root.normalSize;
+      return root.smallSize;
     }
     color: {
       if (focused)
