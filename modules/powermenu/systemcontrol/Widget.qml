@@ -4,6 +4,8 @@ import qs.utils
 import qs.config
 
 GridLayout {
+  anchors.left: parent.left
+  anchors.right: parent.right
   Layout.maximumHeight: icon.height
   Profile {
     id: icon

@@ -22,14 +22,15 @@ StyledWindow {
   margins.top: 10
   margins.right: 10
 
-  implicitHeight: background.height + background.margin
-  implicitWidth: background.width + background.margin
+  implicitHeight: 180
+  implicitWidth: 500
   mask: Region {
     item: background
   }
 
   RectangularShadow {
     anchors.fill: background
+    scale: background.scale
     radius: background.radius
     offset.x: 10
     offset.y: 10
@@ -37,24 +38,44 @@ StyledWindow {
     color: Qt.darker(background.color, 1.6)
   }
 
-  WrapperRectangle {
+  Rectangle {
     id: background
-    margin: 20
+    anchors.fill: parent
+    anchors.topMargin: 20
+    anchors.bottomMargin: 20
+    anchors.rightMargin: 20
+    anchors.leftMargin: 20
     radius: 20
     color: StyleConfig.colourscheme.background
-
-    ColumnLayout {
-      id: content
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.margins: 10
-      spacing: 10
-      SystemControl.Widget {
-        Layout.alignment: Qt.AlignTop
-      }
-      QuickControls.Widget {
-        Layout.fillWidth: true
-      }
+    Column {
+      anchors.fill: parent
+      anchors.topMargin: 10
+      anchors.rightMargin: 10
+      anchors.leftMargin: 10
+      anchors.bottomMargin: 10
+      SystemControl.Widget {}
+      QuickControls.Widget {}
     }
   }
+
+  //   WrapperRectangle {
+  //     id: background
+  //     margin: 20
+  //     radius: 20
+  //     color: StyleConfig.colourscheme.background
+  //
+  //     ColumnLayout {
+  //       id: content
+  //       anchors.left: parent.left
+  //       anchors.right: parent.right
+  //       anchors.margins: 10
+  //       spacing: 10
+  //       SystemControl.Widget {
+  //         Layout.alignment: Qt.AlignTop
+  //       }
+  //       QuickControls.Widget {
+  //         Layout.fillWidth: true
+  //       }
+  //     }
+  //   }
 }
