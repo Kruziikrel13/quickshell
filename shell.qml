@@ -1,5 +1,6 @@
 //@ pragma ShellId shell
 //@ pragma UseQApplication
+//@ pragma RespectSystemStyle
 
 import QtQuick
 import Quickshell
