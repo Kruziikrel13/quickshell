@@ -1,34 +1,28 @@
-import qs
 import Quickshell
 import Quickshell.Hyprland
-import Quickshell.Io
+import qs.utils
 
 Scope {
-  IpcHandler {
-    target: "powermenu"
+  id: root
 
-    function open(): void {
-      GlobalStates.powermenu("open");
-    }
-
-    function close(): void {
-      GlobalStates.powermenu("close");
-    }
-
-    function toggle(): void {
-      GlobalStates.powermenu("toggle");
+  GlobalShortcut {
+    appid: "shell"
+    name: "powermenu"
+    description: "Desktop Power Menu"
+    onPressed: () => {
+      ShellStates.powermenu = !ShellStates.powermenu;
     }
   }
 
   LazyLoader {
     id: loader
-    activeAsync: GlobalStates.showPowerMenu
+    activeAsync: ShellStates.powermenu
     Window {
       id: window
       HyprlandFocusGrab {
         active: true
         windows: [window]
-        onCleared: GlobalStates.powermenu("close")
+        onCleared: ShellStates.powermenu = false
       }
     }
   }
