@@ -17,13 +17,6 @@ Scope {
   LazyLoader {
     id: loader
     activeAsync: ShellStates.powermenu
-    Window {
-      id: window
-      HyprlandFocusGrab {
-        active: true
-        windows: [window]
-        onCleared: ShellStates.powermenu = false
-      }
-    }
+    Window {}
   }
 }

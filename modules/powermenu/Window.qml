@@ -8,6 +8,7 @@ import "quickcontrols" as QuickControls
 import qs.config
 import qs.components
 import qs.components
+import qs.utils
 
 StyledWindow {
   id: window
@@ -16,6 +17,12 @@ StyledWindow {
   anchors {
     top: true
     right: true
+  }
+
+  HyprlandFocusGrab {
+    active: true
+    windows: [window]
+    onCleared: ShellStates.powermenu = false
   }
 
   implicitHeight: 180
