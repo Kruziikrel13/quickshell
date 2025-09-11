@@ -1,8 +1,11 @@
 //@ pragma Internal
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Effects
+
 import Quickshell
 import Quickshell.Wayland
-import QtQuick
-import QtQuick.Effects
+import Quickshell.Hyprland
 import "systemcontrol" as SystemControl
 import "quickcontrols" as QuickControls
 import qs.config
@@ -14,6 +17,7 @@ StyledWindow {
   id: window
   name: "powermenu"
   WlrLayershell.layer: WlrLayer.Overlay
+  WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
   anchors {
     top: true
     right: true
@@ -51,6 +55,14 @@ StyledWindow {
     anchors.leftMargin: 20
     radius: 20
     color: StyleConfig.colourscheme.background
+    TextField {
+      focus: true
+      visible: false
+      Keys.onEscapePressed: event => {
+        event.accepted = true;
+        ShellStates.powermenu = false;
+      }
+    }
     Column {
       anchors.fill: parent
       anchors.topMargin: 10
