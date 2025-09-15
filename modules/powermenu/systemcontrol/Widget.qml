@@ -17,9 +17,10 @@ GridLayout {
   Column {
     Layout.column: 2
     Layout.row: 2
+    Layout.rowSpan: 2
+    Layout.rightMargin: 25
     User {}
     Uptime {}
-    Layout.rightMargin: 25
   }
   Repeater {
     model: [
