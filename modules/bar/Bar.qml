@@ -49,6 +49,7 @@ Variants {
       anchors.rightMargin: 7.5
 
       Tray.Widget {}
+      IdleInhibit {}
       Pipewire {}
       Network {}
       PowerMenu {}
