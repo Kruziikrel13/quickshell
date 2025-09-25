@@ -1,6 +1,5 @@
 //@ pragma Internal
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Effects
 
 import Quickshell
@@ -55,13 +54,10 @@ StyledWindow {
     anchors.leftMargin: 20
     radius: 20
     color: StyleConfig.colourscheme.background
-    TextField {
-      focus: true
-      visible: false
-      Keys.onEscapePressed: event => {
-        event.accepted = true;
-        ShellStates.powermenu = false;
-      }
+    focus: true
+    Keys.onEscapePressed: event => {
+      event.accepted = true;
+      GlobalStates.showPowerMenu = false;
     }
     Column {
       anchors.fill: parent
