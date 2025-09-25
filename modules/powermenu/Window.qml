@@ -7,10 +7,10 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import "systemcontrol" as SystemControl
 import "quickcontrols" as QuickControls
+import qs
 import qs.config
 import qs.components
 import qs.components
-import qs.utils
 
 StyledWindow {
   id: window
@@ -25,7 +25,7 @@ StyledWindow {
   HyprlandFocusGrab {
     active: true
     windows: [window]
-    onCleared: ShellStates.powermenu = false
+    onCleared: GlobalStates.showPowerMenu = false
   }
 
   implicitHeight: 180
