@@ -16,7 +16,7 @@ Scope {
 
   LazyLoader {
     id: loader
-    activeAsync: GlobalStates.showPowerMenu
+    active: GlobalStates.showPowerMenu
     Window {}
   }
 }
