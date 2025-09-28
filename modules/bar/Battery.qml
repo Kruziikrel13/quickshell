@@ -13,6 +13,9 @@ BarWidget {
     sourceComponent: StyledText {
       readonly property UPowerDevice battery: UPower.displayDevice
       color: {
+        if (battery.timeToEmpty === 0) {
+          return StyleConfig.colourscheme.green;
+        }
         if (battery.percentage <= 0.15) {
           return StyleConfig.colourscheme.red;
         } else if (battery.percentage > 0.15 && battery.percentage <= 0.35) {
