@@ -15,7 +15,7 @@ BarWidget {
       color: {
         if (battery.percentage <= 0.15) {
           return StyleConfig.colourscheme.red;
-        } else if (battery.percentage > 0.15 && battery.percentage <= 0.30) {
+        } else if (battery.percentage > 0.15 && battery.percentage <= 0.35) {
           return StyleConfig.colourscheme.yellow;
         }
         return StyleConfig.colourscheme.white;
