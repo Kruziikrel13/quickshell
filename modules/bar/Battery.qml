@@ -1,6 +1,7 @@
 //@ pragma Internal
 import QtQuick
 import Quickshell.Services.UPower
+import qs.config
 import qs.components
 
 BarWidget {
@@ -11,6 +12,14 @@ BarWidget {
     active: UPower.displayDevice !== null && UPower.displayDevice.ready && UPower.displayDevice.isLaptopBattery
     sourceComponent: StyledText {
       readonly property UPowerDevice battery: UPower.displayDevice
+      color: {
+        if (battery.percentage <= 0.15) {
+          return StyleConfig.colourscheme.red;
+        } else if (battery.percentage > 0.15 && battery.percentage <= 0.30) {
+          return StyleConfig.colourscheme.yellow;
+        }
+        return StyleConfig.colourscheme.white;
+      }
       text: {
         const percentage = battery.percentage;
 
