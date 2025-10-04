@@ -5,7 +5,7 @@ import qs.services
 import qs.components
 
 LazyLoader {
-  active: WallpaperService.currentWallpaper !== ""
+  active: WallpaperService.getWallpaperPath() !== ""
   Variants {
     model: Quickshell.screens
 
@@ -15,7 +15,7 @@ LazyLoader {
       screen: modelData
       visible: wallpaperSource !== ""
       required property ShellScreen modelData
-      property string wallpaperSource: WallpaperService.currentWallpaper !== "" ? WallpaperService.currentWallpaper : ""
+      property string wallpaperSource: WallpaperService.getWallpaperPath() !== "" ? WallpaperService.getWallpaperPath() : ""
 
       WlrLayershell.layer: WlrLayer.Background
       WlrLayershell.exclusionMode: ExclusionMode.Ignore

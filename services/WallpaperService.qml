@@ -4,18 +4,28 @@ import QtQuick
 import Qt.labs.folderlistmodel
 import Quickshell
 
-import qs.utils
-
 Singleton {
   id: root
+
+  readonly property string defaultWallpaper: "nebula.jpg"
+  readonly property string defaultDirectory: Qt.resolvedUrl(Quickshell.env("HOME") + "/Pictures/Wallpapers/")
+  property bool isRandom: false
+  property int randomInterval: 300 // in seconds
+  onDefaultDirectoryChanged: WallpaperService.listWallpapers()
+  onIsRandomChanged: WallpaperService.toggleRandomWallpaper()
+  onRandomIntervalChanged: WallpaperService.restartRandomWallpaperTimer()
 
   Component.onCompleted: {
     listWallpapers();
   }
 
   property var wallpaperList: []
-  property string currentWallpaper: ShellSettings.wallpaper.current
+  property string currentWallpaper: defaultWallpaper
   property bool scanning: false
+
+  function getWallpaperPath() {
+    return defaultDirectory + currentWallpaper;
+  }
 
   function listWallpapers() {
     scanning = true;
@@ -23,7 +33,7 @@ Singleton {
 
     // Unsetting, then setting folder retrigger's folder parsing
     folderModel.folder = "";
-    folderModel.folder = "file://" + (ShellSettings.wallpaper.directory !== undefined ? ShellSettings.wallpaper.directory : "");
+    folderModel.folder = "file://" + (defaultDirectory);
   }
 
   function changeWallpaper(path) {
@@ -35,7 +45,7 @@ Singleton {
     currentWallpaper = path;
 
     if (!isInitial) {
-      ShellSettings.wallpaper.setValue("current", path);
+      currentWallpaper = path;
     }
 
     if (randomWallpaperTimer.running) {
@@ -52,16 +62,16 @@ Singleton {
   }
 
   function toggleRandomWallpaper() {
-    if (ShellSettings.wallpaper.isRandom && !randomWallpaperTimer.running) {
+    if (isRandom && !randomWallpaperTimer.running) {
       randomWallpaperTimer.start();
       setRandomWallpaper();
-    } else if (!ShellSettings.wallpaper.isRandom && randomWallpaperTimer.running) {
+    } else if (!isRandom && randomWallpaperTimer.running) {
       randomWallpaperTimer.stop();
     }
   }
 
   function restartRandomWallpaperTimer() {
-    if (ShellSettings.wallpaper.isRandom) {
+    if (isRandom) {
       randomWallpaperTimer.stop();
       randomWallpaperTimer.start();
     }
@@ -69,7 +79,7 @@ Singleton {
 
   Timer {
     id: randomWallpaperTimer
-    interval: ShellSettings.wallpaper.randomInterval * 1000
+    interval: root.randomInterval * 1000
     running: false
     repeat: true
     onTriggered: root.setRandomWallpaper()
@@ -85,7 +95,7 @@ Singleton {
       if (status === FolderListModel.Ready) {
         var files = [];
         for (var i = 0; i < count; i++) {
-          var directory = (ShellSettings.wallpaper.directory !== undefined ? ShellSettings.wallpaper.directory : "");
+          var directory = (root.defaultDirectory !== undefined ? root.defaultDirectory : "");
           var filepath = directory + "/" + get(i, "fileName");
           files.push(filepath);
         }
