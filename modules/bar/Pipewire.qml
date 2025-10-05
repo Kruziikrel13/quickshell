@@ -9,45 +9,49 @@ import qs.services
 
 BarWidget {
   id: root
-  visible: loader.active
-  Loader {
-    id: loader
-    active: Audio.ready
-    sourceComponent: WrapperMouseArea {
-      id: mouseArea
-      acceptedButtons: Qt.LeftButton | Qt.RightButton
-      hoverEnabled: true
-      onClicked: event => {
-        event.accepted = true;
-        switch (event.button) {
-        case Qt.LeftButton:
-          Quickshell.execDetached(["bash", "-c", `wpctl set-mute ${Audio.sink?.id} toggle`]);
-          break;
-        case Qt.RightButton:
-          Quickshell.execDetached(["ghostty", "--class=ghostty.tui", "-e", "pulsemixer"]);
-          break;
-        }
+  property bool initialised: false
+
+  function getIcon() {
+    if (AudioService.muted) {
+      return " ";
+    }
+    return (AudioService.volume <= Number.EPSILON) ? " " : (AudioService.volume <= 0.5) ? " " : " ";
+  }
+
+  MouseArea {
+    id: mArea
+    implicitWidth: icon.width
+    implicitHeight: icon.height
+    acceptedButtons: Qt.LeftButton | Qt.RightButton
+    hoverEnabled: true
+    property int acc: 0
+    onWheel: wheel => {
+      acc += wheel.angleDelta.y;
+
+      if (acc >= 120) {
+        acc = 0;
+        AudioService.increaseVolume();
+      } else if (acc <= -120) {
+        acc = 0;
+        AudioService.decreaseVolume();
       }
-      StyledText {
-        color: mouseArea.containsMouse ? StyleConfig.colourscheme.blue : defaultColor
-        text: {
-          if (!Audio.ready)
-            return "";
-          const volume = Audio.sink?.audio.volume;
-          if (Audio.sink?.audio.muted || volume <= 0) {
-            return "";
-          }
-          if (volume > 0 && volume <= 0.2) {
-            return "";
-          } else if (volume > 0.2 && volume <= 0.45) {
-            return "";
-          } else if (volume > 0.45) {
-            return "";
-          }
-          // Failed to get audio info, show error
-          return "";
-        }
+    }
+    onClicked: event => {
+      event.accepted = true;
+      switch (event.button) {
+      case Qt.LeftButton:
+        AudioService.setOutputMuted(!AudioService.muted);
+        break;
+      case Qt.RightButton:
+        Quickshell.execDetached(["ghostty", "--class=ghostty.tui", "-e", "pulsemixer"]);
+        break;
       }
+    }
+
+    StyledText {
+      id: icon
+      text: root.getIcon()
+      color: mArea.containsMouse ? StyleConfig.colourscheme.blue : defaultColor
     }
   }
 }
