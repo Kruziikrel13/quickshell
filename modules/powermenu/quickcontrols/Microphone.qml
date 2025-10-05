@@ -10,7 +10,7 @@ RowLayout {
   StyledText {
     Layout.preferredWidth: font.pixelSize
     text: {
-      const volume = Audio.source?.audio.volume;
+      const volume = AudioService.source?.audio.volume;
       if (Audio.source?.audio.muted || volume <= 0) {
         return "";
       }
@@ -20,11 +20,16 @@ RowLayout {
   WrapperMouseArea {
     cursorShape: Qt.PointingHandCursor
     Layout.fillWidth: true
+    property int acc: 0
     onWheel: event => {
-      if (event.angleDelta.y > 0 && Audio.source?.audio.volume < 1) {
-        Audio.source.audio.volume += 0.05;
-      } else if (event.angleDelta.y < 0 && Audio.source?.audio.volume > 0) {
-        Audio.source.audio.volume -= 0.05;
+      acc += event.angleDelta.y;
+
+      if (acc >= 120) {
+        acc = 0;
+        AudioService.increaseInputVolume();
+      } else if (acc >= -120) {
+        acc = 0;
+        AudioService.decreaseInputVolume();
       }
     }
     drag.target: slider
@@ -33,18 +38,14 @@ RowLayout {
     drag.maximumX: width
     onPressed: mouse => {
       const vol = (mouse.x / width).toFixed(2);
-      if (vol <= 1) {
-        Audio.source.audio.volume = (mouse.x / width).toFixed(2);
-      }
+      AudioService.setInputVolume(vol);
     }
     onPositionChanged: mouse => {
       if (!drag.active) {
         return;
       }
       const vol = (mouse.x / width).toFixed(2);
-      if (vol <= 1) {
-        Audio.source.audio.volume = (mouse.x / width).toFixed(2);
-      }
+      AudioService.setInputVolume(vol);
     }
     Rectangle {
       radius: 10

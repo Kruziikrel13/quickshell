@@ -9,30 +9,27 @@ import qs.components
 RowLayout {
   StyledText {
     Layout.preferredWidth: font.pixelSize
-    text: {
-      const volume = Audio.sink?.audio.volume;
-      if (Audio.sink?.audio.muted || volume <= 0) {
-        return "";
+    function getIcon() {
+      if (AudioService.muted) {
+        return " ";
       }
-      if (volume > 0 && volume <= 0.2) {
-        return "";
-      } else if (volume > 0.2 && volume <= 0.45) {
-        return "";
-      } else if (volume > 0.45) {
-        return "";
-      }
-      // Failed to get audio info, show error
-      return "";
+      return (AudioService.volume <= Number.EPSILON) ? " " : (AudioService.volume <= 0.5) ? " " : " ";
     }
+    text: getIcon()
   }
   WrapperMouseArea {
     cursorShape: Qt.PointingHandCursor
     Layout.fillWidth: true
+    property int acc: 0
     onWheel: event => {
-      if (event.angleDelta.y > 0 && Audio.sink?.audio.volume < 1) {
-        Audio.sink.audio.volume += 0.05;
-      } else if (event.angleDelta.y < 0 && Audio.sink?.audio.volume > 0) {
-        Audio.sink.audio.volume -= 0.05;
+      acc += event.angleDelta.y;
+
+      if (acc >= 120) {
+        acc = 0;
+        AudioService.increaseVolume();
+      } else if (acc >= -120) {
+        acc = 0;
+        AudioService.decreaseVolume();
       }
     }
     drag.target: slider
@@ -41,18 +38,14 @@ RowLayout {
     drag.maximumX: width
     onPressed: mouse => {
       const vol = (mouse.x / width).toFixed(2);
-      if (vol <= 1) {
-        Audio.sink.audio.volume = (mouse.x / width).toFixed(2);
-      }
+      AudioService.setVolume(vol);
     }
     onPositionChanged: mouse => {
       if (!drag.active) {
         return;
       }
       const vol = (mouse.x / width).toFixed(2);
-      if (vol <= 1) {
-        Audio.sink.audio.volume = (mouse.x / width).toFixed(2);
-      }
+      AudioService.setVolume(vol);
     }
     Rectangle {
       radius: 10
