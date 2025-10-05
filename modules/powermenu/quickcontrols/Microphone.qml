@@ -11,7 +11,7 @@ RowLayout {
     Layout.preferredWidth: font.pixelSize
     text: {
       const volume = AudioService.source?.audio.volume;
-      if (Audio.source?.audio.muted || volume <= 0) {
+      if (AudioService.inputMuted) {
         return "";
       }
       return "";
@@ -58,7 +58,7 @@ RowLayout {
           top: parent.top
           bottom: parent.bottom
         }
-        implicitWidth: parent.width * (Audio.source?.audio.volume ?? 0)
+        implicitWidth: parent.width * (AudioService.source?.audio?.volume ?? 0)
         bottomLeftRadius: parent.radius
         topLeftRadius: parent.radius
         topRightRadius: implicitWidth >= parent.width ? parent.radius : 0

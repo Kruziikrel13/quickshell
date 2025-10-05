@@ -58,7 +58,7 @@ RowLayout {
           top: parent.top
           bottom: parent.bottom
         }
-        implicitWidth: parent.width * (Audio.sink?.audio.volume ?? 0)
+        implicitWidth: parent.width * (AudioService.sink?.audio.volume ?? 0)
         bottomLeftRadius: parent.radius
         topLeftRadius: parent.radius
         topRightRadius: implicitWidth >= parent.width ? parent.radius : 0
