@@ -4,8 +4,6 @@ import QtQuick
 import QtCore
 import Quickshell
 
-import qs.services
-
 /**
  * Global Settings Service
  */
