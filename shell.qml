@@ -7,6 +7,7 @@ import Quickshell
 import qs.utils
 import qs.modules.background
 import qs.modules.bar
+import qs.modules.lockscreen
 import qs.modules.powermenu as PowerMenu
 
 ShellRoot {
@@ -14,4 +15,5 @@ ShellRoot {
   Bar {}
   PowerMenu.Controller {}
   Component.onCompleted: [ShellSettings.init()]
+  LockScreen {}
 }
