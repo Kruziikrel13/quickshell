@@ -6,8 +6,7 @@ import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell.Widgets
 import Quickshell.Services.Pam
-import qs
-import qs.utils
+import qs.common
 import qs.services
 
 Loader {
@@ -113,7 +112,7 @@ Loader {
               anchors.verticalCenterOffset: -256
               radius: 32
               Image {
-                source: ShellSettings.general.avatarImage
+                source: Settings.face
                 sourceSize: Qt.size(256, 256)
               }
             }

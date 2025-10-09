@@ -4,7 +4,6 @@
 
 import QtQuick
 import Quickshell
-import qs.utils
 import qs.modules.background
 import qs.modules.bar
 import qs.modules.lockscreen
@@ -14,6 +13,5 @@ ShellRoot {
   Background {}
   Bar {}
   PowerMenu.Controller {}
-  Component.onCompleted: [ShellSettings.init()]
   LockScreen {}
 }

@@ -7,7 +7,7 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import "systemcontrol" as SystemControl
 import "quickcontrols" as QuickControls
-import qs
+import qs.common
 import qs.config
 import qs.components
 import qs.components
@@ -25,7 +25,7 @@ StyledWindow {
   HyprlandFocusGrab {
     active: true
     windows: [window]
-    onCleared: GlobalStates.showPowerMenu = false
+    onCleared: State.showPowerMenu = false
   }
 
   implicitHeight: 180
@@ -57,7 +57,7 @@ StyledWindow {
     focus: true
     Keys.onEscapePressed: event => {
       event.accepted = true;
-      GlobalStates.showPowerMenu = false;
+      State.showPowerMenu = false;
     }
     Column {
       anchors.fill: parent

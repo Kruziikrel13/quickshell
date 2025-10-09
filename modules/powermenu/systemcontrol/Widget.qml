@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import qs.utils
+import qs.common
 import qs.config
 
 GridLayout {
@@ -9,7 +9,7 @@ GridLayout {
   Layout.maximumHeight: icon.height
   Profile {
     id: icon
-    icon: ShellSettings.general.avatarImage
+    icon: Settings.face
     Layout.column: 1
     Layout.row: 1
     Layout.rowSpan: 3

@@ -1,6 +1,6 @@
 import Quickshell
 import Quickshell.Hyprland
-import qs
+import qs.common
 
 Scope {
   id: root
@@ -10,13 +10,13 @@ Scope {
     name: "powermenu"
     description: "Desktop Power Menu"
     onPressed: () => {
-      GlobalStates.showPowerMenu = !GlobalStates.showPowerMenu;
+      State.showPowerMenu = !State.showPowerMenu;
     }
   }
 
   LazyLoader {
     id: loader
-    active: GlobalStates.showPowerMenu
+    active: State.showPowerMenu
     Window {}
   }
 }
