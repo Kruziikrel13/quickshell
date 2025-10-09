@@ -11,7 +11,7 @@ import qs.services
 
 Loader {
   id: loader
-  active: false // Lock screen on initial startup
+  active: true // Lock screen on initial startup
 
   IdleMonitor {
     id: monitor
