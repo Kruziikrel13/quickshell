@@ -10,13 +10,13 @@ Scope {
     name: "powermenu"
     description: "Desktop Power Menu"
     onPressed: () => {
-      State.showPowerMenu = !State.showPowerMenu;
+      GlobalState.showPowerMenu = !GlobalState.showPowerMenu;
     }
   }
 
   LazyLoader {
     id: loader
-    active: State.showPowerMenu
+    active: GlobalState.showPowerMenu
     Window {}
   }
 }

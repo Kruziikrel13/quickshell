@@ -10,7 +10,7 @@ BarWidget {
   WrapperMouseArea {
     id: mouseArea
     acceptedButtons: Qt.LeftButton | Qt.RightButton
-    onClicked: State.showPowerMenu = !State.showPowerMenu
+    onClicked: GlobalState.showPowerMenu = !GlobalState.showPowerMenu
     hoverEnabled: true
     StyledText {
       color: mouseArea.containsMouse ? StyleConfig.colourscheme.yellow : StyleConfig.colourscheme.red

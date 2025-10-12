@@ -25,7 +25,7 @@ StyledWindow {
   HyprlandFocusGrab {
     active: true
     windows: [window]
-    onCleared: State.showPowerMenu = false
+    onCleared: GlobalState.showPowerMenu = false
   }
 
   implicitHeight: 180
@@ -57,7 +57,7 @@ StyledWindow {
     focus: true
     Keys.onEscapePressed: event => {
       event.accepted = true;
-      State.showPowerMenu = false;
+      GlobalState.showPowerMenu = false;
     }
     Column {
       anchors.fill: parent
