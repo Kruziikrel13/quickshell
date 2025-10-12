@@ -13,9 +13,8 @@ LazyLoader {
       id: background
       name: "background"
       screen: modelData
-      visible: wallpaperSource !== ""
+      visible: img.visible
       required property ShellScreen modelData
-      property string wallpaperSource: WallpaperService.getWallpaperPath() !== "" ? WallpaperService.getWallpaperPath() : ""
 
       WlrLayershell.layer: WlrLayer.Background
       WlrLayershell.exclusionMode: ExclusionMode.Ignore
@@ -27,14 +26,8 @@ LazyLoader {
         right: true
       }
 
-      Image {
-        anchors.fill: parent
-        source: background.wallpaperSource
-        visible: background.wallpaperSource !== ""
-        fillMode: Image.PreserveAspectCrop
-        cache: true
-        smooth: true
-        mipmap: false
+      WallpaperImage {
+        id: img
       }
     }
   }
