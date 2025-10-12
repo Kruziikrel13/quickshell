@@ -1,141 +1,127 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Effects
 import Quickshell
-import Quickshell.Hyprland
+import Quickshell.Io
 import Quickshell.Wayland
-import Quickshell.Widgets
-import Quickshell.Services.Pam
+import Quickshell.Hyprland
 import qs.common
-import qs.services
+import qs.components
 
-Loader {
-  id: loader
-  active: true // Lock screen on initial startup
-
-  IdleMonitor {
-    id: monitor
-    enabled: !loader.active
-    timeout: Settings.lockTimeout
-    respectInhibitors: true
-    onIsIdleChanged: {
-      if (isIdle) {
-        loader.active = true;
-      }
-    }
-  }
+Scope {
+  id: root
 
   GlobalShortcut {
     appid: "shell"
-    name: "lockscreen"
-    description: "Desktop Lock Screen"
-    onPressed: {
-      loader.active = true;
+    name: "lock"
+    description: "Lock Screen"
+    onPressed: () => {
+      GlobalState.lockScreen();
+    }
+  }
+
+  // Implemented here as this implements behaviour for lockScreen
+  IpcHandler {
+    target: "lock"
+
+    function lockScreen(): void {
+      GlobalState.lockScreen();
     }
   }
 
   Timer {
-    id: unloadAfterUnlockTimer
+    id: unlockDelay
     interval: 250
     repeat: false
-    onTriggered: loader.active = false
+    onTriggered: GlobalState.screenLocked = false
   }
 
-  function scheduleUnloadAfterUnlock() {
-    unloadAfterUnlockTimer.start();
+  function scheduleUnload() {
+    unlockDelay.start();
   }
 
-  sourceComponent: Component {
-    Item {
-      id: container
-
-      IdleMonitor {
-        enabled: loader.active
-        timeout: Settings.suspendTimeout
-        onIsIdleChanged: {
-          if (isIdle) {
-            Quickshell.execDetached(["systemctl", "suspend"]);
-          }
-        }
-      }
+  Loader {
+    id: loader
+    active: GlobalState.screenLocked
+    sourceComponent: Item {
       Context {
-        id: context
+        id: ctx
+
         onUnlocked: {
-          session.locked = false;
-          loader.scheduleUnloadAfterUnlock();
-          context.currentText = "";
-        }
-        onFailed: {
-          context.currentText = "";
+          lock.locked = false;
+          root.scheduleUnload();
+          this.reset();
         }
       }
 
       WlSessionLock {
-        id: session
+        id: lock
         locked: loader.active
 
         WlSessionLockSurface {
-          Image {
-            anchors.fill: parent
-            source: WallpaperService.getWallpaperPath()
-            cache: true
-            smooth: true
-            mipmap: false
+          color: "transparent"
+
+          WallpaperImage {
+            id: wallpaper
           }
 
-          Rectangle {
+          MultiEffect {
+            source: wallpaper
+            anchors.fill: wallpaper
+            blurEnabled: true
+            blurMax: 32
+            blur: 2.0
+          }
+
+          MouseArea {
             anchors.fill: parent
-            gradient: Gradient {
-              GradientStop {
-                position: 0.0
-                color: Qt.alpha("black", 0.8)
-              }
-              GradientStop {
-                position: 0.3
-                color: Qt.alpha("black", 0.4)
-              }
-              GradientStop {
-                position: 0.7
-                color: Qt.alpha("black", 0.5)
-              }
-              GradientStop {
-                position: 1.0
-                color: Qt.alpha("black", 0.9)
-              }
+
+            function forceFieldFocus() {
+              passwordInput.forceActiveFocus();
             }
-          }
 
-          Item {
-            anchors.fill: parent
-            ClippingWrapperRectangle {
+            hoverEnabled: true
+            onPressed: forceFieldFocus()
+            onPositionChanged: forceFieldFocus()
+            Component.onCompleted: this.forceActiveFocus()
+
+            StyledText {
               anchors.centerIn: parent
-              anchors.verticalCenterOffset: -256
-              radius: 32
-              Image {
-                source: Settings.face
-                sourceSize: Qt.size(256, 256)
+              anchors.verticalCenterOffset: -128
+              font.pixelSize: 128
+              SystemClock {
+                id: time
+                precision: SystemClock.Seconds
               }
+
+              bold: true
+              text: Qt.formatDateTime(time.date, "hh:mm")
             }
 
             TextInput {
+              id: passwordInput
               width: 0
               height: 0
               visible: false
-              enabled: !context.unlockInProgress
+              enabled: !ctx.unlockInProgress
               echoMode: TextInput.Password
-              text: context.currentText
-              onTextChanged: context.currentText = text
+              passwordCharacter: "•"
+              passwordMaskDelay: 0
+              text: ctx.currentText
+              onTextChanged: ctx.currentText = text
 
               Keys.onPressed: event => {
-                if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                  context.tryUnlock();
-                } else if (event.key === Qt.Key_Escape) {
-                  text = "8104";
-                  context.tryUnlock();
+                switch (event.key) {
+                case Qt.Key_Return:
+                case Qt.Key_Enter:
+                  ctx.tryUnlock();
+                  break;
+                case Qt.Key_Escape:
+                  ctx.reset();
+                  break;
                 }
               }
-
-              Component.onCompleted: forceActiveFocus()
             }
           }
         }
