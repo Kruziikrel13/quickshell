@@ -4,6 +4,7 @@
 
 import QtQuick
 import Quickshell
+import qs.services
 import qs.modules.background
 import qs.modules.bar
 import qs.modules.lockscreen
@@ -14,4 +15,6 @@ ShellRoot {
   Bar {}
   PowerMenu.Controller {}
   LockScreen {}
+
+  Component.onCompleted: [IdleService.start()]
 }

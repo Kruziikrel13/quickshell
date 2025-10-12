@@ -1,7 +1,7 @@
 ## New Features
 
 - Added initial implementation of lock screen
-- Added idle services for automatically locking and suspending the computer
+- Added idle service for automatically locking and suspending the computer
 
 ### Other Features
 - Added laptop battery widget to bar module
