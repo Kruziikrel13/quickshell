@@ -3,6 +3,7 @@ import QtQuick
 import "hyprland" as Hyprland
 import "tray" as Tray
 import qs.config
+import qs.common
 import qs.components
 
 Variants {
@@ -14,8 +15,8 @@ Variants {
     required property ShellScreen modelData
     screen: modelData
 
-    implicitHeight: BarConfig.height
-    color: BarConfig.background
+    implicitHeight: 40
+    color: Colours.colourscheme.background
 
     anchors {
       left: true
