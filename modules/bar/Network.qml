@@ -16,7 +16,7 @@ BarWidget {
       switch (event.button) {
       case Qt.RightButton:
       case Qt.LeftButton:
-        Quickshell.execDetached(["ghostty", "--class=ghostty.tui", "-e", "sleep 0.5; nmtui"]);
+        Quickshell.execDetached(["ghostty", "--class=ghostty.tui", "-e", "nmtui"]);
         break;
       }
       event.accepted = true;
