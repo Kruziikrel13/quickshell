@@ -7,6 +7,7 @@ import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import qs.common
+import qs.services
 import qs.components
 
 Scope {
@@ -90,13 +91,8 @@ Scope {
               anchors.centerIn: parent
               anchors.verticalCenterOffset: -128
               font.pixelSize: 128
-              SystemClock {
-                id: time
-                precision: SystemClock.Seconds
-              }
-
               bold: true
-              text: Qt.formatDateTime(time.date, "hh:mm")
+              text: TimeService.time
             }
 
             TextInput {
