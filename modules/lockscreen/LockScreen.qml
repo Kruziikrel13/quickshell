@@ -71,8 +71,9 @@ Scope {
             source: wallpaper
             anchors.fill: wallpaper
             blurEnabled: true
-            blurMax: 32
-            blur: 2.0
+            blurMax: 64
+            blurMultiplier: -1.0
+            blur: 1.0
           }
 
           MouseArea {
