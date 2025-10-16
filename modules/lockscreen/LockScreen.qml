@@ -61,10 +61,13 @@ Scope {
         locked: loader.active
 
         WlSessionLockSurface {
+          id: surface
           color: "transparent"
 
-          WallpaperImage {
+          ScreencopyView {
             id: wallpaper
+            anchors.fill: parent
+            captureSource: surface.screen
           }
 
           MultiEffect {
