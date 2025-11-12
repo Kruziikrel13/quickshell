@@ -14,7 +14,7 @@ ShellRoot {
   Background {}
   Bar {}
   PowerMenu.Controller {}
-  LockScreen {}
+  // LockScreen {}
 
-  Component.onCompleted: [IdleService.start()]
+  // Component.onCompleted: [IdleService.start()]
 }
