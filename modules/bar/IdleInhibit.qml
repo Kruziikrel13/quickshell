@@ -47,18 +47,4 @@ Item {
     anchors.fill: parent
     onClicked: persist.inhibit = !persist.inhibit
   }
-  // WrapperMouseArea {
-  //   id: mouseArea
-  //   acceptedButtons: Qt.LeftButton
-  //   hoverEnabled: true
-  //   onClicked: event => {
-  //     event.accepted = true;
-  //     IdleService.toggleInhibit();
-  //   }
-  //
-  //   StyledText {
-  //     color: IdleService.inhibit ? StyleConfig.colourscheme.accent : defaultColor
-  //     text: ""
-  //   }
-  // }
 }
