@@ -1,37 +1,34 @@
 //@ pragma Internal
-
 import QtQuick
 import Quickshell
-import Quickshell.Widgets
-import qs.config
-import qs.services
-import qs.components
 
-BarWidget {
-  WrapperMouseArea {
+import qs.services
+import qs.modules.common
+import qs.modules.common.widgets
+
+Item {
+  id: root
+  implicitWidth: text.implicitWidth
+  implicitHeight: Appearance.sizes.barHeight
+  StyledText {
+    id: text
+    anchors.centerIn: parent
+    color: mouseArea.containsMouse ? Appearance.colours.primary : Appearance.colours.on_background
+    text: {
+      if (Network.ethernet) {
+        return "";
+      } else if (Network.wifi) {
+        return "";
+      } else {
+        return " ";
+      }
+    }
+  }
+
+  MouseArea {
     id: mouseArea
-    acceptedButtons: Qt.LeftButton | Qt.RightButton
+    anchors.fill: parent
     hoverEnabled: true
-    onClicked: event => {
-      switch (event.button) {
-      case Qt.RightButton:
-      case Qt.LeftButton:
-        Quickshell.execDetached(["ghostty", "--class=ghostty.tui", "-e", "nmtui"]);
-        break;
-      }
-      event.accepted = true;
-    }
-    StyledText {
-      color: mouseArea.containsMouse ? StyleConfig.colourscheme.blue : defaultColor
-      text: {
-        if (Network.ethernet) {
-          return "";
-        } else if (Network.wifi) {
-          return "";
-        } else {
-          return " ";
-        }
-      }
-    }
+    onClicked: Quickshell.execDetached(["ghostty", "--class=ghostty.tui", "-e", "nmtui"])
   }
 }
