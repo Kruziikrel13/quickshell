@@ -1,13 +1,17 @@
 import QtQuick
 import Quickshell.Io
 import Quickshell.Hyprland
-import qs.components
-import ".."
 
-BarWidget {
+import qs.modules.common
+import qs.modules.common.widgets
+
+Item {
   id: root
   visible: window !== ""
   property string window: ""
+
+  implicitWidth: text.implicitWidth
+  implicitHeight: Appearance.sizes.barHeight
 
   Component.onCompleted: getClient.running = true
   Process {
@@ -37,5 +41,6 @@ BarWidget {
     id: text
     bold: true
     text: root.window
+    anchors.centerIn: parent
   }
 }

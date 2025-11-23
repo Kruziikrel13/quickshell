@@ -1,14 +1,17 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.SystemTray
-import qs.config
-import ".."
 
-BarWidget {
+import qs.modules.common
+
+Item {
   visible: loader.active
+  implicitWidth: loader.implicitWidth
+  implicitHeight: Appearance.sizes.barHeight
   Loader {
     id: loader
     active: SystemTray.items.values.length > 0
+    anchors.centerIn: parent
     sourceComponent: RowLayout {
       spacing: 5
       Repeater {
@@ -19,11 +22,10 @@ BarWidget {
         }
       }
       Rectangle {
-        visible: !BarConfig.showWidgetBackground
         implicitWidth: 6
         implicitHeight: implicitWidth
         radius: height / 2
-        color: StyleConfig.colourscheme.foreground
+        color: Appearance.colours.on_background
       }
     }
   }

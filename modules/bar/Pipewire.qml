@@ -3,12 +3,15 @@
 import Quickshell
 import Quickshell.Widgets
 import QtQuick
-import qs.config
-import qs.components
-import qs.services
 
-BarWidget {
+import qs.services
+import qs.modules.common
+import qs.modules.common.widgets
+
+Item {
   id: root
+  implicitWidth: icon.implicitWidth
+  implicitHeight: Appearance.sizes.barHeight
   property bool initialised: false
 
   function getIcon() {
@@ -18,10 +21,16 @@ BarWidget {
     return (AudioService.volume <= Number.EPSILON) ? " " : (AudioService.volume <= 0.5) ? " " : " ";
   }
 
+  StyledText {
+    id: icon
+    anchors.centerIn: parent
+    text: root.getIcon()
+    color: mArea.containsMouse ? Appearance.colours.primary : Appearance.colours.on_background
+  }
+
   MouseArea {
     id: mArea
-    implicitWidth: icon.width
-    implicitHeight: icon.height
+    anchors.fill: parent
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     hoverEnabled: true
     property int acc: 0
@@ -46,12 +55,6 @@ BarWidget {
         Quickshell.execDetached(["ghostty", "--class=ghostty.tui", "-e", "pulsemixer"]);
         break;
       }
-    }
-
-    StyledText {
-      id: icon
-      text: root.getIcon()
-      color: mArea.containsMouse ? StyleConfig.colourscheme.blue : defaultColor
     }
   }
 }
