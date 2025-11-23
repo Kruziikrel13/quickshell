@@ -1,20 +1,24 @@
+//@ pragma Internal
 import QtQuick
-import Quickshell.Widgets
-import qs.common
-import qs.config
-import qs.components
 
-BarWidget {
+import qs.modules.common
+import qs.modules.common.widgets
+
+Item {
   id: root
+  implicitWidth: text.implicitWidth
+  implicitHeight: Appearance.sizes.barHeight
 
-  WrapperMouseArea {
+  StyledText {
+    id: text
+    anchors.centerIn: parent
+    color: mouseArea.containsMouse ? Appearance.colours.primary : Appearance.colours.error
+    text: ""
+  }
+
+  MouseArea {
     id: mouseArea
-    acceptedButtons: Qt.LeftButton | Qt.RightButton
-    onClicked: GlobalState.showPowerMenu = !GlobalState.showPowerMenu
     hoverEnabled: true
-    StyledText {
-      color: mouseArea.containsMouse ? StyleConfig.colourscheme.yellow : StyleConfig.colourscheme.red
-      text: ""
-    }
+    anchors.fill: parent
   }
 }
