@@ -1,10 +1,9 @@
-import Quickshell
 import QtQuick
-import "hyprland" as Hyprland
-import "tray" as Tray
-import qs.config
-import qs.common
-import qs.components
+import Quickshell
+import Quickshell.Wayland
+
+import qs.modules.common
+import qs.modules.common.widgets
 
 Variants {
   model: Quickshell.screens
@@ -12,11 +11,12 @@ Variants {
   StyledWindow {
     id: window
     name: "bar"
+
     required property ShellScreen modelData
     screen: modelData
 
-    implicitHeight: 40
-    color: Colours.colourscheme.background
+    implicitHeight: Appearance.sizes.barSize
+    color: Appearance.colours.background
 
     anchors {
       left: true
@@ -28,33 +28,19 @@ Variants {
       id: leftContent
       anchors.left: parent.left
       anchors.leftMargin: 7.5
-
-      OsIcon {}
-      Hyprland.WorkspaceWidget {}
-      Hyprland.ActiveClientWidget {}
     }
 
     ModuleGroup {
       id: centerContent
-
       anchors.horizontalCenter: parent.horizontalCenter
 
       Clock {}
-      Spotify {}
     }
 
     ModuleGroup {
       id: rightContent
-
       anchors.right: parent.right
       anchors.rightMargin: 7.5
-
-      Tray.Widget {}
-      Battery {}
-      IdleInhibit {}
-      Pipewire {}
-      Network {}
-      PowerMenu {}
     }
 
     exclusionMode: ExclusionMode.Ignore
