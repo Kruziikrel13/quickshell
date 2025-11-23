@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Quickshell.Wayland
 
 import qs.modules.common
 import qs.modules.common.widgets
@@ -28,6 +27,7 @@ Variants {
       id: leftContent
       anchors.left: parent.left
       anchors.leftMargin: 7.5
+      OsIcon {}
     }
 
     ModuleGroup {
