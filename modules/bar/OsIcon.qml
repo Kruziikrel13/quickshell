@@ -1,13 +1,19 @@
 //@ pragma Internal
-import Quickshell
 import QtQuick
-import qs.config
-import qs.services
-import qs.components
 
-BarWidget {
+import qs.services
+import qs.modules.common
+import qs.modules.common.widgets
+
+Item {
+  id: root
+  implicitWidth: icon.implicitWidth
+  implicitHeight: Appearance.sizes.barHeight
+
   StyledIcon {
-    size: StyleConfig.font.pixelSize.huge
-    source: Qt.resolvedUrl(Quickshell.shellPath("assets/icons")) + "/" + SystemInfo.distroIcon + ".svg"
+    id: icon
+    anchors.centerIn: parent
+    size: Appearance.font.pixelSize.huge
+    icon: SystemInfo.distroIcon + ".svg"
   }
 }
