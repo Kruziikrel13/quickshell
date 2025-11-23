@@ -37,11 +37,13 @@ Item {
   StyledText {
     id: text
     anchors.centerIn: parent
-    color: persist.inhibit ? Appearance.colours.primary : Appearance.colours.on_background
+    color: (persist.inhibit || mouseArea.containsMouse) ? Appearance.colours.primary : Appearance.colours.on_background
     text: ""
   }
 
   MouseArea {
+    id: mouseArea
+    hoverEnabled: true
     anchors.fill: parent
     onClicked: persist.inhibit = !persist.inhibit
   }
