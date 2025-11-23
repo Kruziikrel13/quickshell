@@ -1,6 +1,7 @@
 //@ pragma Internal
 import QtQuick
 
+import qs.common
 import qs.modules.common
 import qs.modules.common.widgets
 
@@ -20,5 +21,6 @@ Item {
     id: mouseArea
     hoverEnabled: true
     anchors.fill: parent
+    onClicked: GlobalState.showPowerMenu = !GlobalState.showPowerMenu
   }
 }
