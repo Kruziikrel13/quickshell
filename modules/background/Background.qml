@@ -1,33 +1,37 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
-import qs.services
-import qs.components
+
+import qs.modules.common.widgets
 
 LazyLoader {
-  active: WallpaperService.getWallpaperPath() !== ""
+  // TODO: Add util for checking if file exists and only loading if it does
+  active: true
   Variants {
     model: Quickshell.screens
 
     StyledWindow {
-      id: background
       name: "background"
-      screen: modelData
-      visible: img.visible
       required property ShellScreen modelData
+      screen: modelData
 
       WlrLayershell.layer: WlrLayer.Background
       WlrLayershell.exclusionMode: ExclusionMode.Ignore
 
       anchors {
         top: true
-        bottom: true
-        left: true
         right: true
+        left: true
+        bottom: true
       }
 
-      WallpaperImage {
-        id: img
+      Image {
+        anchors.fill: parent
+        source: Quickshell.env("HOME") + "/.wallpaper.png"
+        fillMode: Image.PreserveAspectCrop
+        cache: true
+        smooth: true
+        mipmap: false
       }
     }
   }
