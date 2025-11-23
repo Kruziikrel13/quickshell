@@ -5,7 +5,7 @@ import Quickshell.Widgets
 import qs.modules.common
 
 IconImage {
-  required property string icon
+  property string icon
   property real size: Appearance.font.pixelSize.normal
   implicitSize: size
   asynchronous: true
