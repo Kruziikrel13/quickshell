@@ -1,19 +1,22 @@
 //@ pragma Internal
-
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
-import qs.config
-import qs.services
-import qs.components
 
-BarWidget {
+import qs.services
+import qs.modules.common
+import qs.modules.common.widgets
+
+Item {
   id: root
+  implicitWidth: loader.implicitWidth
+  implicitHeight: Appearance.sizes.barHeight
   visible: loader.active
   Loader {
     id: loader
     active: SpotifyController.activeTrack !== null
+    anchors.centerIn: parent
     sourceComponent: WrapperMouseArea {
       id: mouseArea
       hoverEnabled: true
@@ -24,7 +27,7 @@ BarWidget {
           visible: SpotifyController.activeTrack.artUrl !== ""
           radius: 4
           StyledIcon {
-            size: StyleConfig.font.pixelSize.huge
+            size: Appearance.font.pixelSize.huge
             source: SpotifyController.activeTrack.artUrl
             mipmap: true
             backer.fillMode: Image.PreserveAspectCrop
@@ -33,7 +36,7 @@ BarWidget {
         }
         StyledText {
           Layout.maximumWidth: 300
-          color: mouseArea.containsMouse ? StyleConfig.colourscheme.blue : defaultColor
+          color: mouseArea.containsMouse ? Appearance.colours.primary : Appearance.colours.on_background
           text: {
             let track = SpotifyController.activeTrack;
 
