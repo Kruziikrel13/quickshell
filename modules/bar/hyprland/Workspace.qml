@@ -29,7 +29,7 @@ WrapperMouseArea {
         return Appearance.colours.primary;
       if (!empty)
         return Appearance.colours.on_background;
-      return Appearance.colours.background;
+      return Qt.darker(Appearance.colours.on_background, 2);
     }
     radius: height / 4
 
