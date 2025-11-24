@@ -7,10 +7,10 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import "systemcontrol" as SystemControl
 import "quickcontrols" as QuickControls
-import qs.common
-import qs.config
-import qs.components
-import qs.components
+
+import qs
+import qs.modules.common
+import qs.modules.common.widgets
 
 StyledWindow {
   id: window
@@ -53,7 +53,7 @@ StyledWindow {
     anchors.bottomMargin: 20
     anchors.leftMargin: 20
     radius: 20
-    color: StyleConfig.colourscheme.background
+    color: Appearance.colours.background
     focus: true
     Keys.onEscapePressed: event => {
       event.accepted = true;

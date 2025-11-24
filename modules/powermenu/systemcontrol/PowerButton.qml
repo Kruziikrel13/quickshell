@@ -1,9 +1,9 @@
 //@ pragma Internal
 import QtQuick
-import qs.config
+import qs.modules.common
 
 SysButton {
   command: "systemctl poweroff"
-  color: StyleConfig.colourscheme.red
+  color: Appearance.colours.error
   text: ""
 }

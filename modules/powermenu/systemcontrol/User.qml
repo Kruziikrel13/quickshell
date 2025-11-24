@@ -1,7 +1,7 @@
 //@ pragma Internal
 import QtQuick
-import qs.components
 import qs.services
+import qs.modules.common.widgets
 
 StyledText {
   bold: true

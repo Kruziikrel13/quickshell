@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
-import qs.common
-import qs.config
+
+import qs.modules.common
+import qs.modules.common.widgets
 
 GridLayout {
   anchors.left: parent.left
@@ -9,7 +10,7 @@ GridLayout {
   Layout.maximumHeight: icon.height
   Profile {
     id: icon
-    icon: Settings.face
+    icon: Config.face
     Layout.column: 1
     Layout.row: 1
     Layout.rowSpan: 3
@@ -39,7 +40,7 @@ GridLayout {
       {
         text: "",
         command: "systemctl poweroff",
-        color: StyleConfig.colourscheme.red
+        color: Appearance.colours.error
       }
     ]
     SysButton {
@@ -49,7 +50,7 @@ GridLayout {
       Layout.row: 2
       text: modelData.text
       command: modelData.command
-      color: modelData?.color ?? StyleConfig.colourscheme.white
+      color: modelData?.color ?? Appearance.colours.on_background
     }
   }
 }

@@ -2,9 +2,10 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
+
 import qs.services
-import qs.config
-import qs.components
+import qs.modules.common
+import qs.modules.common.widgets
 
 RowLayout {
   StyledText {
@@ -50,7 +51,7 @@ RowLayout {
     Rectangle {
       radius: 10
       implicitHeight: 20
-      color: Qt.darker(StyleConfig.colourscheme.background, 1.4)
+      color: Qt.darker(Appearance.colours.background, 1.4)
       Rectangle {
         id: slider
         anchors {
@@ -63,7 +64,7 @@ RowLayout {
         topLeftRadius: parent.radius
         topRightRadius: implicitWidth >= parent.width ? parent.radius : 0
         bottomRightRadius: implicitWidth >= parent.width ? parent.radius : 0
-        color: StyleConfig.colourscheme.blue
+        color: Appearance.colours.primary
       }
     }
   }

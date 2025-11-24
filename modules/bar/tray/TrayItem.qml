@@ -3,7 +3,8 @@ import QtQuick
 import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
-import qs.config
+
+import qs.modules.common
 
 WrapperMouseArea {
   id: root
@@ -45,6 +46,6 @@ WrapperMouseArea {
       return icon;
     }
     asynchronous: true
-    implicitSize: StyleConfig.font.pixelSize.larger
+    implicitSize: Appearance.font.pixelSize.larger
   }
 }

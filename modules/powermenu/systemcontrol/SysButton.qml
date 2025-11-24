@@ -1,8 +1,9 @@
 //@ pragma Internal
 import QtQuick
 import Quickshell
-import qs.components
-import qs.config
+
+import qs.modules.common
+import qs.modules.common.widgets
 
 MouseArea {
   id: root
@@ -19,7 +20,7 @@ MouseArea {
     implicitWidth: 50
     implicitHeight: content.implicitWidth
     radius: 10
-    color: root.containsMouse ? StyleConfig.colourscheme.blue : Qt.lighter(StyleConfig.colourscheme.background, 2)
+    color: root.containsMouse ? Appearance.colours.primary : Qt.lighter(Appearance.colours.background, 2)
     Behavior on color {
       ColorAnimation {
         duration: 100
@@ -29,7 +30,7 @@ MouseArea {
       id: text
       anchors.centerIn: parent
       text: root.text
-      font.pixelSize: StyleConfig.font.pixelSize.huge
+      font.pixelSize: Appearance.font.pixelSize.huge
     }
   }
 }

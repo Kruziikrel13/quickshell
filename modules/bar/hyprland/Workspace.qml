@@ -2,15 +2,16 @@
 import QtQuick
 import Quickshell.Hyprland
 import Quickshell.Widgets
-import qs.config
+
+import qs.modules.common
 
 WrapperMouseArea {
   id: root
   required property HyprlandWorkspace modelData
   anchors.verticalCenter: parent.verticalCenter
   onClicked: modelData.activate()
-  readonly property int normalSize: StyleConfig.font.pixelSize.normal
-  readonly property int smallSize: Math.round(StyleConfig.font.pixelSize.normal * 0.75)
+  readonly property int normalSize: Appearance.font.pixelSize.normal
+  readonly property int smallSize: Math.round(Appearance.font.pixelSize.normal * 0.75)
   Rectangle {
     readonly property bool empty: root.modelData.toplevels.values.length <= 0
     readonly property bool focused: root.modelData.focused
@@ -18,17 +19,17 @@ WrapperMouseArea {
     implicitHeight: (focused || !empty) ? root.normalSize : root.smallSize
     implicitWidth: {
       if (focused && !empty)
-        return Math.round(StyleConfig.font.pixelSize.normal * 1.5);
+        return Math.round(Appearance.font.pixelSize.normal * 1.5);
       if (!empty)
         return root.normalSize;
       return root.smallSize;
     }
     color: {
       if (focused)
-        return StyleConfig.colourscheme.blue;
+        return Appearance.colours.primary;
       if (!empty)
-        return StyleConfig.colourscheme.white;
-      return StyleConfig.colourscheme.black;
+        return Appearance.colours.on_background;
+      return Appearance.colours.background;
     }
     radius: height / 4
 

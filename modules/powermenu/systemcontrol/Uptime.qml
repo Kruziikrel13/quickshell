@@ -1,7 +1,7 @@
 //@ pragma Internal
 import QtQuick
 import Quickshell.Io
-import qs.components
+import qs.modules.common.widgets
 
 StyledText {
   id: root

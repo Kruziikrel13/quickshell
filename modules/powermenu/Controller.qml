@@ -1,6 +1,6 @@
 import Quickshell
 import Quickshell.Hyprland
-import qs.common
+import qs
 
 Scope {
   id: root
