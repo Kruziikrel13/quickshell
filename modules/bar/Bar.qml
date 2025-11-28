@@ -49,6 +49,8 @@ Variants {
       anchors.right: parent.right
       anchors.rightMargin: 7.5
 
+      // TODO: GameMode
+
       Tray.Widget {}
       IdleInhibit {}
       Pipewire {}
