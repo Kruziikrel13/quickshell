@@ -40,7 +40,7 @@ Variants {
       anchors.horizontalCenter: parent.horizontalCenter
 
       Clock {}
-      Spotify {}
+      // Spotify {}
     }
 
     ModuleGroup {
