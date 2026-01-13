@@ -31,7 +31,7 @@ Variants {
 
       OsIcon {}
       Hyprland.WorkspaceWidget {}
-      Hyprland.ActiveClientWidget {}
+      // Hyprland.ActiveClientWidget {}
     }
 
     ModuleGroup {
