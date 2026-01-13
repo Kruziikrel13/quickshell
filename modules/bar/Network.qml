@@ -15,13 +15,14 @@ Item {
     anchors.centerIn: parent
     color: mouseArea.containsMouse ? Appearance.colours.primary : Appearance.colours.on_background
     text: {
-      if (Network.ethernet) {
-        return "";
-      } else if (Network.wifi) {
-        return "";
-      } else {
-        return " ";
-      }
+      if (!Network.wifi) return "";
+
+      const strength = Network.strength
+      if (strength < 0.2) return "󰤯";
+      if (strength < 0.4) return "󰤟";
+      if (strength < 0.6) return "󰤢";
+      if (strength < 0.8) return "󰤥";
+      if (strength <= 1.0) return "󰤨"
     }
   }
 
