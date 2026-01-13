@@ -1,6 +1,7 @@
 //@ pragma Internal
 
 import Quickshell
+import Quickshell.Hyprland
 import QtQuick
 
 import qs.services
@@ -51,7 +52,7 @@ Item {
         AudioService.setOutputMuted(!AudioService.muted);
         break;
       case Qt.RightButton:
-        Quickshell.execDetached(["ghostty", "--class=ghostty.tui", "-e", "pulsemixer"]);
+        Hyprland.dispatch("exec hyprpwcenter");
         break;
       }
     }
