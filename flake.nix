@@ -11,7 +11,7 @@
     {
       self,
       nixpkgs,
-      quickshell,
+      quickshell',
       qtengine,
     }:
     let
@@ -19,7 +19,7 @@
       overlayPkgs =
         p:
         p.appendOverlays [
-          quickshell.overlays.default
+          quickshell'.overlays.default
         ];
       systems = lib.platforms.linux;
       forEachSystem =
@@ -28,7 +28,9 @@
     {
       packages = forEachSystem (
         system: pkgs: rec {
-          inherit (pkgs) quickshell;
+          quickshell = pkgs.callPackage ./nix/package.nix {
+            quickshell = quickshell'.packages.${system}.default;
+          };
           default = quickshell;
         }
       );
