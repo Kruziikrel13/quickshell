@@ -25,8 +25,8 @@ GridLayout {
   Repeater {
     model: [
       {
-        text: "",
-        command: "loginctl lock-session"
+        text: "",
+        command: "systemctl reboot --boot-loader-entry auto-windows"
       },
       {
         text: "",
