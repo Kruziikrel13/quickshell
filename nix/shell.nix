@@ -8,5 +8,6 @@ pkgs.mkShellNoCC {
   packages = [
     pkgs.qt6.qtdeclarative
     pkgs.nixfmt
+    pkgs.nixd
   ];
 }
