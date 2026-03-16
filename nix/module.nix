@@ -10,12 +10,12 @@ let
   inherit (lib.modules) mkIf;
   inherit (lib.meta) getExe;
   inherit (pkgs.stdenv.hostPlatform) system;
-  inherit (inputs) self qtengine;
+  inherit (inputs) self;
 
   cfg = config.programs.quickshell;
 in
 {
-  imports = [ qtengine.nixosModules.default ];
+  imports = [ self.inputs.qtengine.nixosModules.default ];
   options.programs.quickshell = with lib.types; {
     enable = mkEnableOption "quickshell";
     package = mkPackageOption self.packages.${system} "quickshell" { nullable = false; };

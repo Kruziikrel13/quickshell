@@ -12,7 +12,7 @@
       self,
       nixpkgs,
       qs,
-      qtengine,
+      ...
     }@inputs:
     let
       inherit (nixpkgs) lib;
