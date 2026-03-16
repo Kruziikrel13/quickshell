@@ -13,13 +13,14 @@
       nixpkgs,
       qs,
       qtengine,
-    }:
+    }@inputs:
     let
       inherit (nixpkgs) lib;
       systems = lib.platforms.linux;
       forEachSystem = fn: lib.genAttrs systems (system: fn system nixpkgs.legacyPackages.${system});
     in
     {
+      nixosModules.default = import ./nix/module.nix inputs;
       packages = forEachSystem (
         system: pkgs: rec {
           quickshell = pkgs.callPackage ./nix/package.nix { quickshell = qs.packages.${system}.default; };
