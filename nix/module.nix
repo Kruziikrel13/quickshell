@@ -18,7 +18,6 @@ in
   imports = [ qtengine.nixosModules.default ];
   options.programs.quickshell = with lib.types; {
     enable = mkEnableOption "quickshell";
-    debug = mkEnableOption "quickshell built in debug mode";
     package = mkPackageOption self.packages.${system} "quickshell" { nullable = false; };
     systemd = {
       enable = mkEnableOption "auto startup with systemd";
