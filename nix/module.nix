@@ -1,7 +1,5 @@
 inputs:
 {
-  self ? inputs.self,
-  qtengine ? inputs.qtengine,
   config,
   lib,
   pkgs,
@@ -12,6 +10,7 @@ let
   inherit (lib.modules) mkIf;
   inherit (lib.meta) getExe;
   inherit (pkgs.stdenv.hostPlatform) system;
+  inherit (inputs) self qtengine;
 
   cfg = config.programs.quickshell;
 in
@@ -65,7 +64,6 @@ in
           menusHaveIcons = true;
           shortcutsForContextMenus = true;
         };
-
       };
     };
 
