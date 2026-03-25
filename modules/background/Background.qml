@@ -27,7 +27,7 @@ LazyLoader {
 
       Image {
         anchors.fill: parent
-        source: Quickshell.env("HOME") + "/.wallpaper.png"
+        source: Quickshell.env("HOME") + "/.wallpaper.jpg"
         fillMode: Image.PreserveAspectCrop
         cache: true
         smooth: true
