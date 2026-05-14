@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1778458615,
-        "narHash": "sha256-cY07EsdhBJ8tFXPzDYevgqxRev9ZLxFonuq9wmq5kwg=",
+        "lastModified": 1778672786,
+        "narHash": "sha256-Blg88K1jwG+P0Mr27+rKMFCufdrWkV3wWh9AdYtz0FQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c6e5ca3c836a5f4dd9af9f2c1fc1c38f0fac988a",
+        "rev": "eef00dfd8a712b34af845f9350bac681b1228bd1",
         "type": "github"
       },
       "original": {
@@ -43,11 +43,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772766331,
-        "narHash": "sha256-aJ5ZdIX10nmhzMLjP6QMuFJHvljJD+xcojuKZjPkr70=",
+        "lastModified": 1778644540,
+        "narHash": "sha256-D7mzavE5WfLyvEXV0pvO3/gxC+SSmfjw4Lxy7I5qvnI=",
         "owner": "kossLAN",
         "repo": "qtengine",
-        "rev": "abf8c1d3068dd10739b0671fa62f96c5347f276f",
+        "rev": "073987f0120ac77a92fb9f0c0877aa7f1f04d3bf",
         "type": "github"
       },
       "original": {
