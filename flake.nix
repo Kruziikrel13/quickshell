@@ -9,7 +9,6 @@
   };
   outputs =
     {
-      self,
       nixpkgs,
       qs,
       ...
@@ -25,14 +24,6 @@
         system: pkgs: rec {
           quickshell = pkgs.callPackage ./nix/package.nix { quickshell = qs.packages.${system}.default; };
           default = quickshell;
-        }
-      );
-      devShells = forEachSystem (
-        system: pkgs: {
-          default = import ./nix/shell.nix {
-            inherit pkgs;
-            inherit (self.packages.${system}) quickshell;
-          };
         }
       );
     };
